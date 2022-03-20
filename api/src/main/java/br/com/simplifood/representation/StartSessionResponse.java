@@ -1,4 +1,4 @@
-package br.com.simplifood.wppconnect;
+package br.com.simplifood.representation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

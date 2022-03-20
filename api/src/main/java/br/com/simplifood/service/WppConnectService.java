@@ -1,5 +1,6 @@
-package br.com.simplifood.wppconnect;
+package br.com.simplifood.service;
 
+import br.com.simplifood.representation.StartSessionResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 

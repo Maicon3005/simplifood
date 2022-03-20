@@ -1,5 +1,5 @@
 import "./style.css";
-import { BotaoAzul, TopMenu } from "../../components";
+import { BotaoAzul, QRCode, TopMenu } from "../../components";
 import { SidebarRight } from "../../components";
 
 export function QRCodeConfigure() {
@@ -14,7 +14,7 @@ export function QRCodeConfigure() {
             se registrar na plataforma Simplifood.
           </p>
           <div>
-              <p>QRCODE</p>
+              <QRCode />
           </div>
           <BotaoAzul conteudo="Confirmar"/>
         </div>
