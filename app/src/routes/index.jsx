@@ -9,7 +9,7 @@ const Routes = () => {
 
   const signed = true;
 
-  console.log("signed: ", signed);
+  //console.log("signed: ", signed);
 
  return signed ? <OtherRoutes /> : <SignRoutes />;
 };

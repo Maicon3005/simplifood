@@ -16,7 +16,6 @@ export function QRCodeConfigure() {
           <div>
               <QRCode />
           </div>
-          <BotaoAzul conteudo="Confirmar"/>
         </div>
         <SidebarRight />
       </div>
