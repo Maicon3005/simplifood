@@ -5,11 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class StartSessionResponse {
-    String status;
-    String session;
+@AllArgsConstructor
+public class WPPTokenRequest {
     String token;
-    String full;
 }

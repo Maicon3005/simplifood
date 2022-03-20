@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StartSessionResponse {
-    String status;
-    String session;
-    String token;
-    String full;
+public class QRCodeResponse {
+    private String status;
+    private String qrcode;
+    private String urlcode;
 }
