@@ -1,0 +1,16 @@
+.imagem-logo {
+    width: 45%;
+}
+
+.mensagem-lateral {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 85px;
+}
+
+.mensagem-lateral{
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}

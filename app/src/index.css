@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@200&family=DM+Sans&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box
+}
+
+body {
+  font-family: 'DM Sans', sans-serif, Arial, Helvetica, sans-serif;
+  color: #4A4B4C;
+  width: 100%;
+  height: 100%;
+}
+
+.container-principal {
+  display: flex;
+  justify-content: right;
+}
+
+.titulo-padrao {
+  font-size: 34px;
+}
+
+.subtitle-padrao {
+  font-size: 15px;
+}
+
+.campo-texto {
+  background-color: #ddf2f6;
+  ;
+  font-size: 12px;
+  width: 70%;
+  height: 36px;
+  border-radius: 50px;
+  padding: 0 20px 0 20px;
+  margin: 7.5px;
+}
+
+.divisor-pagina {
+  width: 70%;
+  margin: 10px 0;
+}
+
+.sidebar-direita {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 35%;
+  height: 100vh;
+  background-color: #049DBF;
+}
