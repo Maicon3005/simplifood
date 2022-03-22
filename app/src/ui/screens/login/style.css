@@ -1,4 +1,4 @@
-.sidebar-esquerda {
+.sidebar-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,16 +6,29 @@
     width: 65%;
 }
 
-.botao-rede-social {
+.sidebar-left h1 {
+    padding: 2.5px;
+}
+
+.sidebar-left h3 {
+    padding: 2.5px;
+}
+
+.buttons-social-network {
+    align-items: center;
+    justify-content: center;
+}
+
+.button-social-network {
     background: #FFF;
     margin: 7.5px;
 }
 
-.botao-rede-social:hover {
+.button-social-network:hover {
     cursor: pointer;
 }
 
-.botao-rede-social img {
+.button-social-network img {
     width: 30px;
 }
 
@@ -27,20 +40,7 @@
     width: 100%;
 }
 
-.sidebar-esquerda h1 {
-    padding: 2.5px;
-}
-
-.sidebar-esquerda h3 {
-    padding: 2.5px;
-}
-
-.botoes-rede-social {
-    align-items: center;
-    justify-content: center;
-}
-
-.erro-mensagem{
+.error-message {
     width: 70%;
     height: 20px;
     text-align: center;

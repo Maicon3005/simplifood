@@ -1,7 +1,7 @@
 package br.com.simplifood.security;
 
-import br.com.simplifood.data.DetalheUsuarioData;
-import br.com.simplifood.model.UsuarioModel;
+import br.com.simplifood.data.DetailUserData;
+import br.com.simplifood.model.UserModel;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,10 +34,10 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
-            UsuarioModel usuario = new ObjectMapper().readValue(request.getInputStream(), UsuarioModel.class);
+            UserModel usuario = new ObjectMapper().readValue(request.getInputStream(), UserModel.class);
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     usuario.getEmail(),
-                    usuario.getSenha(),
+                    usuario.getPassword(),
                     new ArrayList<>()
             ));
         } catch (IOException e) {
@@ -50,7 +50,7 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        DetalheUsuarioData usuarioData = (DetalheUsuarioData) authResult.getPrincipal();
+        DetailUserData usuarioData = (DetailUserData) authResult.getPrincipal();
 
         String token = JWT.create().
                 withSubject(usuarioData.getUsername()).

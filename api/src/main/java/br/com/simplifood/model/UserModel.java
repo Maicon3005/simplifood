@@ -10,14 +10,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Usuario")
-public class UsuarioModel {
+public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
-    private String sobrenome;
+    private String name;
+    @Column(name = "last_name")
+    private String lastName;
     @Column(unique = true)
     private String email;
-    private String senha;
+    private String password;
 }

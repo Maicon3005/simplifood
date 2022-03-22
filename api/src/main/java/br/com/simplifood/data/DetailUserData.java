@@ -1,6 +1,6 @@
 package br.com.simplifood.data;
 
-import br.com.simplifood.model.UsuarioModel;
+import br.com.simplifood.model.UserModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
-public class DetalheUsuarioData implements UserDetails {
+public class DetailUserData implements UserDetails {
 
-    private final Optional<UsuarioModel> usuario;
+    private final Optional<UserModel> usuario;
 
-    public DetalheUsuarioData(Optional<UsuarioModel> usuario) {
+    public DetailUserData(Optional<UserModel> usuario) {
         this.usuario = usuario;
     }
 
@@ -23,12 +23,12 @@ public class DetalheUsuarioData implements UserDetails {
 
     @Override
     public String getPassword() {
-        return usuario.orElse(new UsuarioModel()).getSenha();
+        return usuario.orElse(new UserModel()).getPassword();
     }
 
     @Override
     public String getUsername() {
-        return usuario.orElse(new UsuarioModel()).getEmail();
+        return usuario.orElse(new UserModel()).getEmail();
     }
 
     @Override

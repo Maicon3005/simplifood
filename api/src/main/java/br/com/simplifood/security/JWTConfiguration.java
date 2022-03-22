@@ -1,6 +1,6 @@
 package br.com.simplifood.security;
 
-import br.com.simplifood.service.DetalheUsuarioServiceImpl;
+import br.com.simplifood.service.DetailUserServiceImpl;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,10 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class JWTConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final DetalheUsuarioServiceImpl usuarioService;
+    private final DetailUserServiceImpl usuarioService;
     private final PasswordEncoder passwordEncoder;
 
-    public JWTConfiguration(DetalheUsuarioServiceImpl usuarioService, PasswordEncoder passwordEncoder) {
+    public JWTConfiguration(DetailUserServiceImpl usuarioService, PasswordEncoder passwordEncoder) {
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -28,7 +28,7 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().
-                antMatchers(HttpMethod.POST, "/login").
+                antMatchers(HttpMethod.POST, "/login","/user/save").
                 permitAll().
                 anyRequest().
                 authenticated().

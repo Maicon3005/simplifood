@@ -1,4 +1,4 @@
-.botao-azul {
+.button-blue {
     background-color: #049DBF;
     font-size: 14px;
     font-weight: 700;
@@ -12,7 +12,7 @@
     transition: 0.7s;
 }
 
-.botao-azul:hover {
+.button-blue:hover {
     background-color: #04aacc;
     cursor: pointer;
     box-shadow: none;

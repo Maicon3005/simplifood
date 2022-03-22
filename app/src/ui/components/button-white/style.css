@@ -1,4 +1,4 @@
-.botao-branco{
+.button-white {
     font-family: 'DM Sans', sans-serif, Arial, Helvetica, sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -6,11 +6,11 @@
     height: 6%;
     margin: 2%;
     border-radius: 50px;
-    box-shadow: 1px 5px 6px -3px rgba(0,0,0,0.65);
+    box-shadow: 1px 5px 6px -3px rgba(0, 0, 0, 0.65);
     transition: 0.7s;
 }
 
-.botao-branco:hover{
+.button-white:hover {
     background-color: #e6f5f9;
     cursor: pointer;
     box-shadow: none;

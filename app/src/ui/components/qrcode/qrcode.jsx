@@ -2,10 +2,10 @@ import "./style.css";
 import { useEffect, useState } from "react";
 
 import { BotaoAzul } from "..";
-import api from "../../../services/api";
+import api from "../../../services/use-axios-hook";
 
 export function QRCode() {
-  const [tokenWpp, setTokenWpp] = useState({});
+  /*const [tokenWpp, setTokenWpp] = useState({});
   const [qrcode, setQrcode] = useState("");
 
   async function getTokenWpp() {
@@ -59,5 +59,6 @@ export function QRCode() {
       />
       <BotaoAzul conteudo="Iniciar" />
     </div>
-  );
+  );*/
+  return <h1>em manutenção</h1>
 }
