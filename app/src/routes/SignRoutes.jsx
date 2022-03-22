@@ -1,11 +1,12 @@
 import { BrowserRouter, Route } from "react-router-dom";
 
-import { Login } from "../ui/screens";
+import { Login, StepOne } from "../ui/screens";
 
 export function SignRoutes() {
   return (
     <BrowserRouter>
-      <Route path="/" component={Login} />
+      <Route path="/" component={Login} exact />
+      <Route path="/criar-conta-1" component={StepOne} exact/>
     </BrowserRouter>
   );
 }

@@ -2,7 +2,7 @@ import "./style.css";
 import { useRef, useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
-import { ButtonBlue, SidebarRightLogin } from "../../components";
+import { SidebarRightLogin } from "../../components";
 import IconeFacebook from "../../../assets/images/icon-facebook.svg";
 import IconeGoogle from "../../../assets/images/icon-google.svg";
 import IconeLinkedin from "../../../assets/images/icon-linkedin.svg";
@@ -108,7 +108,7 @@ export function Login() {
               type="password"
               required
             />
-            <ButtonBlue content="Entrar" />
+            <button className="button-blue">Entrar</button>
           </form>
         </div>
         <SidebarRightLogin />
