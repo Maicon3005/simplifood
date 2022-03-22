@@ -1,11 +1,10 @@
-import Routes from "./routes";
-import { useHistory } from "react-router-dom";
+import { Routes } from "./routes";
 import { AuthProvider } from "./context/auth";
 
 function App() {
   return (
     <AuthProvider>
-      <Routes />;
+      <Routes />
     </AuthProvider>
   );
 }

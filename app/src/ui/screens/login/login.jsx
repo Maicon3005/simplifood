@@ -2,16 +2,13 @@ import "./style.css";
 import { useRef, useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
-import { BotaoAzul, SidebarDireitaLogin } from "../../components";
+import { ButtonBlue, SidebarRightLogin } from "../../components";
 import IconeFacebook from "../../../assets/images/icon-facebook.svg";
 import IconeGoogle from "../../../assets/images/icon-google.svg";
 import IconeLinkedin from "../../../assets/images/icon-linkedin.svg";
 import IconOu from "../../../assets/images/icon-ou.svg";
-import api from "../../../services/api";
 
 import AuthContext from "../../../context/auth";
-
-const URL_LOGIN = "/login";
 
 export function Login() {
   const context = useContext(AuthContext);
@@ -19,7 +16,7 @@ export function Login() {
   const erroRef = useRef();
 
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
   const [mensagemErro, setMensagemErro] = useState("");
   const [isRedirect, setIsRedirect] = useState({ redirect: false });
 
@@ -29,15 +26,15 @@ export function Login() {
 
   useEffect(() => {
     setMensagemErro("");
-  }, [email, senha]);
+  }, [email, password]);
 
   function handleEmail(event) {
     setEmail(event.target.value);
     event.preventDefault();
   }
 
-  function handleSenha(event) {
-    setSenha(event.target.value);
+  function handlePassword(event) {
+    setPassword(event.target.value);
     event.preventDefault();
   }
 
@@ -45,7 +42,7 @@ export function Login() {
     event.preventDefault();
 
     try {
-      context.Login(email, senha);
+      context.Login(email, password);
       setIsRedirect({ redirect: true });
     } catch (erro) {
       if (!erro?.response) {
@@ -64,29 +61,29 @@ export function Login() {
   return (
     <>
       {isRedirect.redirect && <Redirect to="/desktop" />}
-      <div className="container-principal">
-        <div className="sidebar-esquerda">
-          <h1 className="titulo-padrao">Entrar na sua conta</h1>
-          <h3 className="subtitle-padrao">Entre com suas redes sociais</h3>
-          <div className="botoes-rede-social">
-            <button className="botao-rede-social">
+      <div className="container-main">
+        <div className="sidebar-left">
+          <h1 className="default-title">Entrar na sua conta</h1>
+          <h3 className="default-subtitle">Entre com suas redes sociais</h3>
+          <div className="buttons-social-network">
+            <button className="button-social-network">
               <img src={IconeFacebook} alt="Botão acessar com Facebook" />
             </button>
-            <button className="botao-rede-social">
+            <button className="button-social-network">
               <img src={IconeGoogle} alt="Botão acessar com Google" />
             </button>
-            <button className="botao-rede-social">
+            <button className="button-social-network">
               <img src={IconeLinkedin} alt="Botão acessar com Linkedin" />
             </button>
           </div>
           <img
             src={IconOu}
-            className="divisor-pagina"
+            className="divider-page"
             alt="Icone de escolha do login"
           />
           <p
             ref={erroRef}
-            className={mensagemErro ? "erro-mensagem" : "offscreen"}
+            className={mensagemErro ? "error-message" : "offscreen"}
             aria-live="assertive"
           >
             {mensagemErro}
@@ -95,7 +92,7 @@ export function Login() {
             <input
               id="email"
               ref={emailRef}
-              className="campo-texto"
+              className="text-field"
               placeholder="Email"
               value={email}
               onChange={handleEmail}
@@ -103,18 +100,18 @@ export function Login() {
               required
             />
             <input
-              id="senha"
-              className="campo-texto"
+              id="password"
+              className="text-field"
               placeholder="Senha"
-              value={senha}
-              onChange={handleSenha}
+              value={password}
+              onChange={handlePassword}
               type="password"
               required
             />
-            <BotaoAzul conteudo="Entrar" />
+            <ButtonBlue content="Entrar" />
           </form>
         </div>
-        <SidebarDireitaLogin />
+        <SidebarRightLogin />
       </div>
     </>
   );

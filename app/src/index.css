@@ -10,24 +10,23 @@
 body {
   font-family: 'DM Sans', sans-serif, Arial, Helvetica, sans-serif;
   color: #4A4B4C;
-  width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
-.container-principal {
+.container-main {
   display: flex;
   justify-content: right;
 }
 
-.titulo-padrao {
+.default-title {
   font-size: 34px;
 }
 
-.subtitle-padrao {
+.default-subtitle {
   font-size: 15px;
 }
 
-.campo-texto {
+.text-field {
   background-color: #ddf2f6;
   ;
   font-size: 12px;
@@ -38,12 +37,12 @@ body {
   margin: 7.5px;
 }
 
-.divisor-pagina {
+.divider-page {
   width: 70%;
   margin: 10px 0;
 }
 
-.sidebar-direita {
+.sidebar-right {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,4 +50,14 @@ body {
   width: 35%;
   height: 100vh;
   background-color: #049DBF;
+}
+
+.side-message {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 85px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
 }

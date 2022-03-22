@@ -1,29 +1,28 @@
 import { createContext, useState, useEffect } from "react";
-import api from "../services/api";
+import { useSimplifoodApi } from "../services/use-simplifood-api";
 
 const AuthContext = createContext({});
 
-export const AuthProvider = ({ children }) => {
+export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const api = useSimplifoodApi();
+
   useEffect(() => {
     const storagedToken = localStorage.getItem("@App:token");
 
     if (storagedToken) {
-      api.defaults.headers.Authorization = storagedToken;
+      //api.defaults.headers.Authorization = storagedToken;
       setIsAuthenticated(true);
     }
   }, []);
 
   async function Login(email, senha) {
-    const response = await api.post("/login", {
-      email: email,
-      senha: senha,
-    });
+    const response = await api.login(email, senha);
 
     if (response.status === 200) {
       localStorage.setItem("@App:token", `Bearer ${response.data}`);
       setIsAuthenticated(true);
-      api.defaults.headers.Authorization = `Bearer ${response.data}`;
+      //api.defaults.headers.Authorization = `Bearer ${response.data}`;
     }
   }
   return (
@@ -31,6 +30,6 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export default AuthContext;
