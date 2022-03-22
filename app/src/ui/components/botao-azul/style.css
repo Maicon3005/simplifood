@@ -2,7 +2,8 @@
     background-color: #049DBF;
     font-size: 14px;
     font-weight: 700;
-    width: 28%;
+    width: auto;
+    padding: 10px;
     height: 34px;
     margin: 2%;
     color: #fff;

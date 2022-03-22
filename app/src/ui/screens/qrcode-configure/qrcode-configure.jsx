@@ -1,22 +1,21 @@
 import "./style.css";
-import { BotaoAzul, TopMenu } from "../../components";
+import { BotaoAzul, QRCode, TopMenu } from "../../components";
 import { SidebarRight } from "../../components";
 
 export function QRCodeConfigure() {
   return (
-    <div className="container-qrcode">
+    <div className="container-qrcode-configure">
       <TopMenu />
-      <div className="page-qrcode">
-        <div className="section-qrcode">
-          <h1 className="title-qrcode">Configurar o WhatsApp do seu estabelecimento</h1>
-          <p className="content-qrcode">
+      <div className="page-qrcode-configure">
+        <div className="section-qrcode-configure">
+          <h1 className="title-qrcode-configure">
+            Configurar o WhatsApp do seu estabelecimento
+          </h1>
+          <p className="content-qrcode-configure">
             Utilize o leitor de QR CODE do WhatsApp de seu estabelecimento para
             se registrar na plataforma Simplifood.
           </p>
-          <div>
-              <p>QRCODE</p>
-          </div>
-          <BotaoAzul conteudo="Confirmar"/>
+          <QRCode />
         </div>
         <SidebarRight />
       </div>

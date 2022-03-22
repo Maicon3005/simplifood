@@ -1,14 +1,15 @@
 import "./style.css";
+import { useRef, useState, useEffect, useContext } from "react";
+import { Redirect } from "react-router-dom";
+
 import { BotaoAzul, SidebarDireitaLogin } from "../../components";
 import IconeFacebook from "../../../assets/images/icon-facebook.svg";
 import IconeGoogle from "../../../assets/images/icon-google.svg";
 import IconeLinkedin from "../../../assets/images/icon-linkedin.svg";
 import IconOu from "../../../assets/images/icon-ou.svg";
-import { useRef, useState, useEffect, useContext } from "react";
+import api from "../../../services/api";
 
 import AuthContext from "../../../context/auth";
-import { useHistory } from "react-router-dom";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const URL_LOGIN = "/login";
 
@@ -16,12 +17,11 @@ export function Login() {
   const context = useContext(AuthContext);
   const emailRef = useRef();
   const erroRef = useRef();
-  //const UseHistory = useHistory();
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagemErro, setMensagemErro] = useState("");
-  const [sucesso, setSucesso] = useState(false);
+  const [isRedirect, setIsRedirect] = useState({ redirect: false });
 
   useEffect(() => {
     emailRef.current.focus();
@@ -46,6 +46,7 @@ export function Login() {
 
     try {
       context.Login(email, senha);
+      setIsRedirect({ redirect: true });
     } catch (erro) {
       if (!erro?.response) {
         setMensagemErro("Sem resposta do servidor");
@@ -58,62 +59,63 @@ export function Login() {
       }
       erroRef.current.focus();
     }
-
-    setSucesso(true);
   }
 
   return (
-    <div className="container-principal">
-      <div className="sidebar-esquerda">
-        <h1 className="titulo-padrao">Entrar na sua conta</h1>
-        <h3 className="subtitle-padrao">Entre com suas redes sociais</h3>
-        <div className="botoes-rede-social">
-          <button className="botao-rede-social">
-            <img src={IconeFacebook} alt="Botão acessar com Facebook" />
-          </button>
-          <button className="botao-rede-social">
-            <img src={IconeGoogle} alt="Botão acessar com Google" />
-          </button>
-          <button className="botao-rede-social">
-            <img src={IconeLinkedin} alt="Botão acessar com Linkedin" />
-          </button>
+    <>
+      {isRedirect.redirect && <Redirect to="/desktop" />}
+      <div className="container-principal">
+        <div className="sidebar-esquerda">
+          <h1 className="titulo-padrao">Entrar na sua conta</h1>
+          <h3 className="subtitle-padrao">Entre com suas redes sociais</h3>
+          <div className="botoes-rede-social">
+            <button className="botao-rede-social">
+              <img src={IconeFacebook} alt="Botão acessar com Facebook" />
+            </button>
+            <button className="botao-rede-social">
+              <img src={IconeGoogle} alt="Botão acessar com Google" />
+            </button>
+            <button className="botao-rede-social">
+              <img src={IconeLinkedin} alt="Botão acessar com Linkedin" />
+            </button>
+          </div>
+          <img
+            src={IconOu}
+            className="divisor-pagina"
+            alt="Icone de escolha do login"
+          />
+          <p
+            ref={erroRef}
+            className={mensagemErro ? "erro-mensagem" : "offscreen"}
+            aria-live="assertive"
+          >
+            {mensagemErro}
+          </p>
+          <form onSubmit={handleSubmit} className="form-login">
+            <input
+              id="email"
+              ref={emailRef}
+              className="campo-texto"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmail}
+              type="email"
+              required
+            />
+            <input
+              id="senha"
+              className="campo-texto"
+              placeholder="Senha"
+              value={senha}
+              onChange={handleSenha}
+              type="password"
+              required
+            />
+            <BotaoAzul conteudo="Entrar" />
+          </form>
         </div>
-        <img
-          src={IconOu}
-          className="divisor-pagina"
-          alt="Icone de escolha do login"
-        />
-        <p
-          ref={erroRef}
-          className={mensagemErro ? "erro-mensagem" : "offscreen"}
-          aria-live="assertive"
-        >
-          {mensagemErro}
-        </p>
-        <form onSubmit={handleSubmit} className="form-login">
-          <input
-            id="email"
-            ref={emailRef}
-            className="campo-texto"
-            placeholder="Email"
-            value={email}
-            onChange={handleEmail}
-            type="email"
-            required
-          />
-          <input
-            id="senha"
-            className="campo-texto"
-            placeholder="Senha"
-            value={senha}
-            onChange={handleSenha}
-            type="password"
-            required
-          />
-          <BotaoAzul conteudo="Entrar" />
-        </form>
+        <SidebarDireitaLogin />
       </div>
-      <SidebarDireitaLogin />
-    </div>
+    </>
   );
 }

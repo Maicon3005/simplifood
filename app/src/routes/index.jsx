@@ -5,13 +5,11 @@ import SignRoutes from "./SignRoutes";
 import OtherRoutes from "./OtherRoutes";
 
 const Routes = () => {
-  //const { signed } = useContext(AuthContext);
+  const { signed } = useContext(AuthContext);
 
-  const signed = true;
+  console.log("valor signed route ", signed);
 
-  console.log("signed: ", signed);
-
- return signed ? <OtherRoutes /> : <SignRoutes />;
+  return signed ? <OtherRoutes /> : <SignRoutes />;
 };
 
 export default Routes;
