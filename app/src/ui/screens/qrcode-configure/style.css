@@ -1,14 +1,14 @@
-.container-qrcode{
+.container-qrcode-configure{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.page-qrcode{
+.page-qrcode-configure{
     display: flex;
 }
 
-.section-qrcode{
+.section-qrcode-configure{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,12 +17,12 @@
     padding: 10%;
 }
 
-.title-qrcode{
+.title-qrcode-configure{
     font-size: 28px;
     margin: 10px 0px;
 }
 
-.content-qrcode{
+.content-qrcode-configure{
     font-size: 15px;
     margin: 10px 0px;
 }
