@@ -92,7 +92,7 @@ export function Login() {
             <input
               id="email"
               ref={emailRef}
-              className="text-field"
+              className="text-field text-field-medium"
               placeholder="Email"
               value={email}
               onChange={handleEmail}
@@ -101,7 +101,7 @@ export function Login() {
             />
             <input
               id="password"
-              className="text-field"
+              className="text-field text-field-medium"
               placeholder="Senha"
               value={password}
               onChange={handlePassword}

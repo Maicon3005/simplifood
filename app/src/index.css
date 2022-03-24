@@ -28,13 +28,19 @@ body {
 
 .text-field {
   background-color: #ddf2f6;
-  ;
   font-size: 12px;
-  width: 70%;
   height: 36px;
   border-radius: 50px;
   padding: 0 20px 0 20px;
   margin: 7.5px;
+}
+
+.text-field-medium{
+  width: 70%;
+}
+
+.text-field-large{
+  width: 100%;
 }
 
 .divider-page {
