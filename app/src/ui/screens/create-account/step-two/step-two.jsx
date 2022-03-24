@@ -4,9 +4,11 @@ import "../../create-account/style.css";
 import IconStepTwo from "../../../../assets/images/icon-step-two.svg";
 
 import { SidebarRight } from "../../../components";
+import { useHistory } from "react-router-dom";
 
 export function StepTwo() {
   const erroRef = useRef();
+  const history = useHistory();
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -47,6 +49,7 @@ export function StepTwo() {
       setErroMessage("As senhas não são iguais");
       return;
     }
+    history.push("/criar-conta-3");
   }
 
   function handleCheckBox(event) {
