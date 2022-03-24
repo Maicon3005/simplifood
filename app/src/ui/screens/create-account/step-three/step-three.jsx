@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import "./style.css";
 import "../../create-account/style.css";
 import IconStepThree from "../../../../assets/images/icon-step-three.svg";
 
 import { SidebarRight } from "../../../components";
+import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect } from "react";
 
 export function StepThree() {
+  const api = useSimplifoodApi();
+  const history = useHistory();
+  const userId = history.location.state.iduser;
+
   const [corporateName, setCorporateName] = useState("");
   const [fantasyName, setFantasyName] = useState("");
   const [cnpj, setCnpj] = useState("");
@@ -63,6 +70,23 @@ export function StepThree() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    try {
+      await api.restaurantSave(
+        userId,
+        corporateName,
+        fantasyName,
+        cnpj,
+        cep,
+        city,
+        state,
+        district,
+        street,
+        number
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -149,7 +173,7 @@ export function StepThree() {
               type="text"
             />
           </div>
-          <button className="button-blue">
+          <button className="button-blue button-blue-registry-client">
             Avançar
           </button>
         </form>

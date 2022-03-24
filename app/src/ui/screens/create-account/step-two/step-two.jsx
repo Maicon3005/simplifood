@@ -5,10 +5,12 @@ import IconStepTwo from "../../../../assets/images/icon-step-two.svg";
 
 import { SidebarRight } from "../../../components";
 import { useHistory } from "react-router-dom";
+import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
 
 export function StepTwo() {
   const erroRef = useRef();
   const history = useHistory();
+  const api = useSimplifoodApi();
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -49,7 +51,14 @@ export function StepTwo() {
       setErroMessage("As senhas não são iguais");
       return;
     }
-    history.push("/criar-conta-3");
+
+    try {
+      const response = await api.userSave(name, lastName, email, password);
+      const location = { pathname: "/criar-conta-3", state: response.data };
+      history.push(location);
+    } catch (error) {
+      setErroMessage("Erro ", error);
+    }
   }
 
   function handleCheckBox(event) {

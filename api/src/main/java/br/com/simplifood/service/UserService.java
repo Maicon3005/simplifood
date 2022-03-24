@@ -2,6 +2,7 @@ package br.com.simplifood.service;
 
 import br.com.simplifood.model.UserModel;
 import br.com.simplifood.repository.UserRepository;
+import br.com.simplifood.representation.CreateUserResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +20,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserModel saveUser(UserModel user){
+    public CreateUserResponse saveUser(UserModel user){
         user.setPassword(encoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        CreateUserResponse createUserResponse =  new CreateUserResponse(userRepository.save(user).getId());
+        return createUserResponse;
     }
 
     public boolean validatePassword(String email, String password){

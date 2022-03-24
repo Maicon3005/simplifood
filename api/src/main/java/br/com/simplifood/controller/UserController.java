@@ -2,6 +2,7 @@ package br.com.simplifood.controller;
 
 import br.com.simplifood.model.UserModel;
 import br.com.simplifood.repository.UserRepository;
+import br.com.simplifood.representation.CreateUserResponse;
 import br.com.simplifood.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<UserModel> saveUser(@RequestBody UserModel user){
+    public ResponseEntity<CreateUserResponse> saveUser(@RequestBody UserModel user){
         return ResponseEntity.ok(userService.saveUser(user));
     }
 
