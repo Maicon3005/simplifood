@@ -1,0 +1,37 @@
+.sidebar-left-step-three {
+    padding: 0 5%;
+}
+
+.sidebar-left-step-three h1 {
+    width: 70%;
+    text-align: center;
+    padding: 1% 5%;
+}
+
+.cep-search,
+.city-state,
+.street-number {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.field-left {
+    width: 75%;
+}
+
+.field-right {
+    width: 25%;
+}
+
+.form-registry-restaurant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}
+
+.icon-step-three{
+    width: 20%;
+}

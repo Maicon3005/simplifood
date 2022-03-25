@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Usuario")
+@Entity(name = "User_owner")
 public class UserModel {
 
     @Id
@@ -21,4 +21,12 @@ public class UserModel {
     @Column(unique = true)
     private String email;
     private String password;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "restaurant_model_id")
+    private RestaurantModel restaurantModel;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "address_model_id")
+    private AddressModel addressModel;
 }

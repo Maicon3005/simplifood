@@ -28,13 +28,19 @@ body {
 
 .text-field {
   background-color: #ddf2f6;
-  ;
   font-size: 12px;
-  width: 70%;
   height: 36px;
   border-radius: 50px;
   padding: 0 20px 0 20px;
   margin: 7.5px;
+}
+
+.text-field-medium{
+  width: 70%;
+}
+
+.text-field-large{
+  width: 100%;
 }
 
 .divider-page {
@@ -60,4 +66,46 @@ body {
   font-size: 14px;
   color: #fff;
   text-align: center;
+}
+
+.sidebar-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 65%;
+}
+
+.sidebar-left h1 {
+  padding: 2.5px;
+}
+
+.sidebar-left h3 {
+  padding: 2.5px;
+}
+
+.sidebar-left p {
+  padding: 2.5px;
+  font-size: 15px;
+}
+
+.button-blue {
+  background-color: #049DBF;
+  font-size: 14px;
+  font-weight: 700;
+  width: auto;
+  padding: 5px 30px;
+  height: 34px;
+  margin: 2%;
+  color: #fff;
+  border-radius: 50px;
+  box-shadow: 1px 5px 6px -3px rgba(0, 0, 0, 0.65);
+  transition: 0.7s;
+}
+
+.button-blue:hover {
+  background-color: #04aacc;
+  cursor: pointer;
+  box-shadow: none;
+  transition: 0.7s;
 }

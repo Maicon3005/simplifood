@@ -1,0 +1,20 @@
+.sidebar-left-step-one {
+    padding: 15%;
+    height: 100vh;
+}
+
+.sidebar-left-step-one h1 {
+    margin: 15px;
+}
+
+.sidebar-left-step-one p {
+    margin: 15px;
+}
+
+.sidebar-left-step-one img {
+    margin: 25px;
+}
+
+.icon-step-one {
+    width: 30%;
+}

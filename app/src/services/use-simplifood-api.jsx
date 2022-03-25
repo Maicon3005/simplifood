@@ -12,9 +12,43 @@ export function useSimplifoodApi() {
     return response;
   }
 
+  async function userSave(
+    name,
+    lastName,
+    email,
+    password,
+    corporateName,
+    fantasyName,
+    cnpj,
+    cep,
+    city,
+    state,
+    district,
+    street,
+    number
+  ) {
+    const response = await instance.post("/user/save", {
+      name,
+      lastName,
+      email,
+      password,
+      corporateName,
+      fantasyName,
+      cnpj,
+      cep,
+      city,
+      state,
+      district,
+      street,
+      number,
+    });
+    return response;
+  }
+
   return useCallback(
     {
       login,
+      userSave,
     },
     []
   );

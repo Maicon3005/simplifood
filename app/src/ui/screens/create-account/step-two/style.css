@@ -1,0 +1,34 @@
+.sidebar-left-step-two {
+    padding: 0 5%;
+}
+
+.sidebar-left-step-two h1 {
+    width: 80%;
+    text-align: center;
+    padding: 1% 5%;
+}
+
+.form-registry-client {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+.checkbox-password input {
+    margin-right: 7.5px;
+}
+
+.checkbox-password{
+    font-size: 14px;
+    padding: 2%;
+}
+
+.button-blue-registry-client {
+    width: 30%;
+    margin: 2.5%;
+}
+.icon-step-two{
+    padding: 2%;
+    width: 25%;
+}
