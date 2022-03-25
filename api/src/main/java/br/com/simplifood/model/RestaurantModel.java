@@ -18,8 +18,4 @@ public class RestaurantModel {
     private String corporateName;
     private String fantasyName;
     private String cnpj;
-
-    @OneToOne
-    @JoinColumn(name = "user_model_id")
-    private UserModel userModel;
 }

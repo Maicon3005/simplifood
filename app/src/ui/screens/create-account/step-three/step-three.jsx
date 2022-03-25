@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import "./style.css";
 import "../../create-account/style.css";
 import IconStepThree from "../../../../assets/images/icon-step-three.svg";
@@ -11,7 +11,7 @@ import { useEffect } from "react";
 export function StepThree() {
   const api = useSimplifoodApi();
   const history = useHistory();
-  const userId = history.location.state.iduser;
+  const userObj = history.location.state;
 
   const [corporateName, setCorporateName] = useState("");
   const [fantasyName, setFantasyName] = useState("");
@@ -22,6 +22,10 @@ export function StepThree() {
   const [district, setDistrict] = useState("");
   const [street, setStreet] = useState("");
   const [number, setNumber] = useState("");
+
+  useEffect(() => {
+    console.log(userObj);
+  }, []);
 
   function handleCorporateName(event) {
     setCorporateName(event.target.value);
@@ -68,12 +72,24 @@ export function StepThree() {
     event.preventDefault();
   }
 
+  async function handleSearchCep(event) {
+    event.preventDefault();
+    try {
+      //await viaCepApi(cep);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      await api.restaurantSave(
-        userId,
+      await api.userSave(
+        userObj.name,
+        userObj.lastName,
+        userObj.email,
+        userObj.password,
         corporateName,
         fantasyName,
         cnpj,
@@ -127,7 +143,9 @@ export function StepThree() {
               onChange={handleCep}
               type="text"
             />
-            <button className="button-blue">Consultar</button>
+            <button className="button-blue" onClick={handleSearchCep}>
+              Consultar
+            </button>
           </div>
           <div className="city-state">
             <input
@@ -141,7 +159,7 @@ export function StepThree() {
             <input
               id="state"
               className="text-field field-right"
-              placeholder="Estado"
+              placeholder="UF"
               value={state}
               onChange={handleState}
               type="text"
@@ -167,13 +185,13 @@ export function StepThree() {
             <input
               id="number"
               className="text-field field-right"
-              placeholder="Number"
+              placeholder="Nº"
               value={number}
               onChange={handleNumber}
               type="text"
             />
           </div>
-          <button className="button-blue button-blue-registry-client">
+          <button className="button-blue">
             Avançar
           </button>
         </form>

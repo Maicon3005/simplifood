@@ -12,18 +12,11 @@ export function useSimplifoodApi() {
     return response;
   }
 
-  async function userSave(name, lastName, email, password) {
-    const response = await instance.post("/user/save", {
-      name,
-      lastName,
-      email,
-      password,
-    });
-    return response;
-  }
-
-  async function restaurantSave(
-    userId,
+  async function userSave(
+    name,
+    lastName,
+    email,
+    password,
     corporateName,
     fantasyName,
     cnpj,
@@ -34,8 +27,11 @@ export function useSimplifoodApi() {
     street,
     number
   ) {
-    const response = await instance.post("/restaurant/save", {
-      userId,
+    const response = await instance.post("/user/save", {
+      name,
+      lastName,
+      email,
+      password,
       corporateName,
       fantasyName,
       cnpj,
@@ -53,7 +49,6 @@ export function useSimplifoodApi() {
     {
       login,
       userSave,
-      restaurantSave,
     },
     []
   );

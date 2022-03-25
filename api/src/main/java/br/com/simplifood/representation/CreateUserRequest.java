@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantWIthAddressRequest {
-    private Integer userId;
+public class CreateUserRequest {
+    private String name;
+    private String lastName;
+    private String email;
+    private String password;
     private String corporateName;
     private String fantasyName;
     private String cnpj;
