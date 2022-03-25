@@ -6,10 +6,11 @@ import IconStepThree from "../../../../assets/images/icon-step-three.svg";
 import { SidebarRight } from "../../../components";
 import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect } from "react";
+import { useViaCepApi } from "../../../../services/use-viacep-api";
 
 export function StepThree() {
   const api = useSimplifoodApi();
+  const apiViaCep = useViaCepApi();
   const history = useHistory();
   const userObj = history.location.state;
 
@@ -22,10 +23,6 @@ export function StepThree() {
   const [district, setDistrict] = useState("");
   const [street, setStreet] = useState("");
   const [number, setNumber] = useState("");
-
-  useEffect(() => {
-    console.log(userObj);
-  }, []);
 
   function handleCorporateName(event) {
     setCorporateName(event.target.value);
@@ -75,7 +72,12 @@ export function StepThree() {
   async function handleSearchCep(event) {
     event.preventDefault();
     try {
-      //await viaCepApi(cep);
+      const response = await apiViaCep.getCep(cep);
+      const address = response.data;
+      setCity(address.localidade);
+      setState(address.uf);
+      setDistrict(address.bairro);
+      setStreet(address.logradouro);
     } catch (error) {
       console.log(error);
     }
@@ -191,9 +193,7 @@ export function StepThree() {
               type="text"
             />
           </div>
-          <button className="button-blue">
-            Avançar
-          </button>
+          <button className="button-blue">Avançar</button>
         </form>
         <img
           className="icon-step-three"

@@ -1,0 +1,26 @@
+.sidebar-left-step-five {
+    padding: 12.5%;
+    width: 65%;
+    height: 100vh;
+}
+
+.sidebar-left-step-five h1 {
+    font-size: 26px;
+    text-align: center;
+}
+
+.sidebar-left-step-five p {
+    font-size: 14px;
+    margin: 5% 0;
+}
+
+.option-qrcode{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.icon-step-five {
+    width: 30%;
+    margin: 5% 0;
+}
