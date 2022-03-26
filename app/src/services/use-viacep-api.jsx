@@ -1,4 +1,4 @@
-import { useAxios } from "./use-axios-hook";
+/*import { useAxios } from "./use-axios-hook";
 import { useCallback } from "react";
 
 export function useViaCepApi() {
@@ -11,3 +11,4 @@ export function useViaCepApi() {
 
   return useCallback({ getCep }, []);
 }
+*/

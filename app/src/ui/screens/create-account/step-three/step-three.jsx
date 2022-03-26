@@ -103,10 +103,6 @@ export function StepThree() {
         street,
         number
       );
-
-      console.log("response rest, ", response);
-
-      //await context.Login(userObj.email, userObj.password);
       history.push("/criar-conta-4");
     } catch (error) {
       console.log(error);

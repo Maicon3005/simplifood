@@ -6,8 +6,11 @@ import IconStepTwo from "../../../../assets/images/icon-step-two.svg";
 import { SidebarRight } from "../../../components";
 import { useHistory } from "react-router-dom";
 import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
+import { useContext } from "react";
+import AuthContext from "../../../../context/auth";
 
 export function StepTwo() {
+  const context = useContext(AuthContext);
   const erroRef = useRef();
   const history = useHistory();
   const api = useSimplifoodApi();
@@ -55,8 +58,8 @@ export function StepTwo() {
 
     try {
       const response = await api.userSave(name, lastName, email, password);
-      console.log("response ", response);
       const location = { pathname: "/criar-conta-3", state: response.data };
+      context.Login(email, password);
       history.push(location);
     } catch (error) {
       console.log(error);

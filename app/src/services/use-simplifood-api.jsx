@@ -2,7 +2,8 @@ import { useAxios } from "./use-axios-hook";
 import { useCallback } from "react";
 
 export function useSimplifoodApi() {
-  const instance = useAxios("http://localhost:8080", {});
+  const TOKEN_API = localStorage.getItem("@App:token");
+  const instance = useAxios("http://localhost:8080", TOKEN_API);
 
   async function login(email, password) {
     const response = await instance.post("/login", {
@@ -51,12 +52,14 @@ export function useSimplifoodApi() {
 
   async function postTokenWpp() {
     const response = await instance.post("/generatetoken", {});
+    console.log(response);
     return response;
   }
 
   async function startSession(tokenWpp) {
+    console.log("token app ", tokenWpp);
     const response = await instance.post("/startsession", {
-      token: `Bearer ${tokenWpp}`,
+      token: tokenWpp,
     });
     return response;
   }
@@ -75,6 +78,7 @@ export function useSimplifoodApi() {
       postTokenWpp,
       startSession,
       postTokenWpp,
+      postQRCode,
     },
     []
   );

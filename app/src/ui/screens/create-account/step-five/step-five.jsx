@@ -5,8 +5,11 @@ import IconOu from "../../../../assets/images/icon-ou.svg";
 import { QRCode, SidebarRight } from "../../../components";
 
 import { useHistory } from "react-router-dom";
+import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
+import { useEffect, useState } from "react";
 
 export function StepFive() {
+  const api = useSimplifoodApi();
   const history = useHistory();
 
   function handleStepFive() {
