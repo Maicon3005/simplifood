@@ -18,4 +18,12 @@ public class RestaurantModel {
     private String corporateName;
     private String fantasyName;
     private String cnpj;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "address_model_id")
+    private AddressModel addressModel;
+
+    @OneToOne
+    @JoinColumn(name = "user_model_id")
+    private UserModel userModel;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./style.css";
 import "../../create-account/style.css";
 import IconStepThree from "../../../../assets/images/icon-step-three.svg";
@@ -7,8 +7,10 @@ import { SidebarRight } from "../../../components";
 import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useViaCepApi } from "../../../../services/use-viacep-api";
+import AuthContext from "../../../../context/auth";
 
 export function StepThree() {
+  const context = useContext(AuthContext);
   const api = useSimplifoodApi();
   const apiViaCep = useViaCepApi();
   const history = useHistory();
@@ -86,12 +88,11 @@ export function StepThree() {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    console.log("user id ", userObj.iduser);
+
     try {
-      await api.userSave(
-        userObj.name,
-        userObj.lastName,
-        userObj.email,
-        userObj.password,
+      const response = await api.restaurantSave(
+        userObj.iduser,
         corporateName,
         fantasyName,
         cnpj,
@@ -102,6 +103,11 @@ export function StepThree() {
         street,
         number
       );
+
+      console.log("response rest, ", response);
+
+      //await context.Login(userObj.email, userObj.password);
+      history.push("/criar-conta-4");
     } catch (error) {
       console.log(error);
     }

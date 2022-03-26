@@ -1,17 +1,17 @@
 package br.com.simplifood.mapper;
 
 import br.com.simplifood.model.RestaurantModel;
-import br.com.simplifood.representation.CreateUserRequest;
+import br.com.simplifood.representation.CreateRestaurantRequest;
 
 public class RestaurantToModelMapper {
 
     private RestaurantModel restaurantModel;
 
-    public RestaurantToModelMapper(CreateUserRequest createUserRequest) {
+    public RestaurantToModelMapper(CreateRestaurantRequest createRestaurantRequest) {
         this.restaurantModel = new RestaurantModel();
-        this.restaurantModel.setCorporateName(createUserRequest.getCorporateName());
-        this.restaurantModel.setFantasyName(createUserRequest.getFantasyName());
-        this.restaurantModel.setCnpj(createUserRequest.getCnpj());
+        this.restaurantModel.setCorporateName(createRestaurantRequest.getCorporateName());
+        this.restaurantModel.setFantasyName(createRestaurantRequest.getFantasyName());
+        this.restaurantModel.setCnpj(createRestaurantRequest.getCnpj());
     }
 
     public RestaurantModel toModel(){
