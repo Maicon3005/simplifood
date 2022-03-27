@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import "./style.css";
 import "../../create-account/style.css";
 import IconStepThree from "../../../../assets/images/icon-step-three.svg";
@@ -6,13 +6,9 @@ import IconStepThree from "../../../../assets/images/icon-step-three.svg";
 import { SidebarRight } from "../../../components";
 import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-//import { useViaCepApi } from "../../../../services/use-viacep-api";
-import AuthContext from "../../../../context/auth";
 
 export function StepThree() {
-  const context = useContext(AuthContext);
   const api = useSimplifoodApi();
-  //const apiViaCep = useViaCepApi();
   const history = useHistory();
   const userObj = history.location.state;
 
@@ -72,9 +68,9 @@ export function StepThree() {
   }
 
   async function handleSearchCep(event) {
-   /* event.preventDefault();
+    event.preventDefault();
     try {
-      const response = await apiViaCep.getCep(cep);
+      const response = await api.getAddress(cep);
       const address = response.data;
       setCity(address.localidade);
       setState(address.uf);
@@ -82,7 +78,7 @@ export function StepThree() {
       setStreet(address.logradouro);
     } catch (error) {
       console.log(error);
-    }*/
+    }
   }
 
   async function handleSubmit(event) {
@@ -91,7 +87,7 @@ export function StepThree() {
     console.log("user id ", userObj.iduser);
 
     try {
-      const response = await api.restaurantSave(
+      await api.restaurantSave(
         userObj.iduser,
         corporateName,
         fantasyName,

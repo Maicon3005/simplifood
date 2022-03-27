@@ -55,18 +55,25 @@ export function useSimplifoodApi() {
     return response;
   }
 
+  async function getAddress(cep) {
+    const response = await instance.post("/address/getaddress", {
+      cep: cep,
+    });
+    return response;
+  }
+
   async function startSession(tokenWpp) {
     const response = await instance.post("/startsession", {
       token: tokenWpp,
     });
     return response;
   }
-
+/*
   async function postQRCode(tokenWpp) {
     const response = await instance.post("/getqrcode", {
       token: tokenWpp,
     });
-  }
+  }*/
 
   async function statusSession(tokenWpp) {
     const response = await instance.post("/getStatusConnection", {
@@ -81,9 +88,8 @@ export function useSimplifoodApi() {
       userSave,
       restaurantSave,
       postTokenWpp,
+      getAddress,
       startSession,
-      postTokenWpp,
-      postQRCode,
       statusSession,
     },
     []
