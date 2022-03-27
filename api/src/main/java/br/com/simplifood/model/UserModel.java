@@ -21,12 +21,4 @@ public class UserModel {
     @Column(unique = true)
     private String email;
     private String password;
-
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "restaurant_model_id")
-    private RestaurantModel restaurantModel;
-
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "address_model_id")
-    private AddressModel addressModel;
 }

@@ -1,8 +1,9 @@
 package br.com.simplifood.controller;
 
-import br.com.simplifood.representation.StartSessionResponse;
-import br.com.simplifood.representation.WPPTokenRequest;
 import br.com.simplifood.representation.QRCodeResponse;
+import br.com.simplifood.representation.StartSessionResponse;
+import br.com.simplifood.representation.StatusConnectionResponse;
+import br.com.simplifood.representation.WPPTokenRequest;
 import br.com.simplifood.service.WppConnectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,10 @@ public class WppConnectController {
         return QRCodeResponse != null ? ResponseEntity.ok().body(QRCodeResponse) : ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/getStatusConnection")
+    private ResponseEntity<StatusConnectionResponse> getStatusConnection(@RequestBody WPPTokenRequest wppTokenRequest){
+        StatusConnectionResponse statusConnectionResponse = wppConnectService.getStatusConnection(wppTokenRequest.getToken());
+        return statusConnectionResponse != null ? ResponseEntity.ok().body(statusConnectionResponse) : ResponseEntity.notFound().build();
+    }
 
 }

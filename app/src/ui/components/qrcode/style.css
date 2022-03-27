@@ -1,10 +1,11 @@
 .container-qrcode {
     display: flex;
-    flex-direction: column;
+    width: 100%;
     justify-content: center;
-    align-items: center;
-    width: 65%;
-    background-color: aqua;
+}
+
+.container-qrcode img{
+    width: 50%;
 }
 
 .qrcode-image {

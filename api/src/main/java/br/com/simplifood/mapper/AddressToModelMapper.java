@@ -1,20 +1,20 @@
 package br.com.simplifood.mapper;
 
 import br.com.simplifood.model.AddressModel;
-import br.com.simplifood.representation.CreateUserRequest;
+import br.com.simplifood.representation.CreateRestaurantRequest;
 
 public class AddressToModelMapper {
 
     private AddressModel addressModel;
 
-    public AddressToModelMapper(CreateUserRequest createUserRequest) {
+        public AddressToModelMapper(CreateRestaurantRequest createRestaurantRequest){
         this.addressModel = new AddressModel();
-        this.addressModel.setCep(createUserRequest.getCep());
-        this.addressModel.setCity(createUserRequest.getCity());
-        this.addressModel.setState(createUserRequest.getState());
-        this.addressModel.setDistrict(createUserRequest.getDistrict());
-        this.addressModel.setStreet(createUserRequest.getStreet());
-        this.addressModel.setNumber(createUserRequest.getNumber());
+        this.addressModel.setCep(createRestaurantRequest.getCep());
+        this.addressModel.setCity(createRestaurantRequest.getCity());
+        this.addressModel.setState(createRestaurantRequest.getState());
+        this.addressModel.setDistrict(createRestaurantRequest.getDistrict());
+        this.addressModel.setStreet(createRestaurantRequest.getStreet());
+        this.addressModel.setNumber(createRestaurantRequest.getNumber());
     }
 
     public AddressModel toModel(){

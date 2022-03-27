@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateUserRequest {
-    private String name;
-    private String lastName;
-    private String email;
-    private String password;
+public class StatusConnectionResponse {
+    boolean status;
+    String message;
 }

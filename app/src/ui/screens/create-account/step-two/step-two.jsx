@@ -5,10 +5,15 @@ import IconStepTwo from "../../../../assets/images/icon-step-two.svg";
 
 import { SidebarRight } from "../../../components";
 import { useHistory } from "react-router-dom";
+import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
+import { useContext } from "react";
+import AuthContext from "../../../../context/auth";
 
 export function StepTwo() {
+  const context = useContext(AuthContext);
   const erroRef = useRef();
   const history = useHistory();
+  const api = useSimplifoodApi();
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -51,15 +56,14 @@ export function StepTwo() {
       return;
     }
 
-    const userObj = {
-      name: name,
-      lastName: lastName,
-      email: email,
-      password: password,
-    };
-
-    const location = { pathname: "/criar-conta-3", state: userObj };
-    history.push(location);
+    try {
+      const response = await api.userSave(name, lastName, email, password);
+      const location = { pathname: "/criar-conta-3", state: response.data };
+      context.Login(email, password);
+      history.push(location);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleCheckBox(event) {

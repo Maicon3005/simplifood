@@ -2,7 +2,8 @@ import { useAxios } from "./use-axios-hook";
 import { useCallback } from "react";
 
 export function useSimplifoodApi() {
-  const instance = useAxios("http://localhost:8080", {});
+  const TOKEN_API = localStorage.getItem("@App:token");
+  const instance = useAxios("http://localhost:8080", TOKEN_API);
 
   async function login(email, password) {
     const response = await instance.post("/login", {
@@ -12,11 +13,18 @@ export function useSimplifoodApi() {
     return response;
   }
 
-  async function userSave(
-    name,
-    lastName,
-    email,
-    password,
+  async function userSave(name, lastName, email, password) {
+    const response = await instance.post("/user/save", {
+      name,
+      lastName,
+      email,
+      password,
+    });
+    return response;
+  }
+
+  async function restaurantSave(
+    userId,
     corporateName,
     fantasyName,
     cnpj,
@@ -27,11 +35,8 @@ export function useSimplifoodApi() {
     street,
     number
   ) {
-    const response = await instance.post("/user/save", {
-      name,
-      lastName,
-      email,
-      password,
+    const response = await instance.post("/restaurant/save", {
+      userId,
       corporateName,
       fantasyName,
       cnpj,
@@ -45,10 +50,47 @@ export function useSimplifoodApi() {
     return response;
   }
 
+  async function postTokenWpp() {
+    const response = await instance.post("/generatetoken", {});
+    return response;
+  }
+
+  async function getAddress(cep) {
+    const response = await instance.post("/address/getaddress", {
+      cep: cep,
+    });
+    return response;
+  }
+
+  async function startSession(tokenWpp) {
+    const response = await instance.post("/startsession", {
+      token: tokenWpp,
+    });
+    return response;
+  }
+/*
+  async function postQRCode(tokenWpp) {
+    const response = await instance.post("/getqrcode", {
+      token: tokenWpp,
+    });
+  }*/
+
+  async function statusSession(tokenWpp) {
+    const response = await instance.post("/getStatusConnection", {
+      token: tokenWpp,
+    });
+    return response.data;
+  }
+
   return useCallback(
     {
       login,
       userSave,
+      restaurantSave,
+      postTokenWpp,
+      getAddress,
+      startSession,
+      statusSession,
     },
     []
   );

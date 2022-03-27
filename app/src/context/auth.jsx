@@ -11,7 +11,6 @@ export function AuthProvider({ children }) {
     const storagedToken = localStorage.getItem("@App:token");
 
     if (storagedToken) {
-      //api.defaults.headers.Authorization = storagedToken;
       setIsAuthenticated(true);
     }
   }, []);
@@ -22,7 +21,6 @@ export function AuthProvider({ children }) {
     if (response.status === 200) {
       localStorage.setItem("@App:token", `Bearer ${response.data}`);
       setIsAuthenticated(true);
-      //api.defaults.headers.Authorization = `Bearer ${response.data}`;
     }
   }
   return (

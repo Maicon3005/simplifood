@@ -1,0 +1,26 @@
+.sidebar-left-step-four {
+    padding: 12.5%;
+    width: 65%;
+    height: 100vh;
+}
+
+.sidebar-left-step-four h1 {
+    font-size: 26px;
+    text-align: center;
+}
+
+.sidebar-left-step-four p {
+    font-size: 14px;
+    margin: 5% 0;
+}
+
+.buttons-options-whatsapp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.icon-step-four {
+    width: 30%;
+    margin: 5% 0;
+}

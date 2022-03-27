@@ -6,7 +6,6 @@ import IconStepThree from "../../../../assets/images/icon-step-three.svg";
 import { SidebarRight } from "../../../components";
 import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect } from "react";
 
 export function StepThree() {
   const api = useSimplifoodApi();
@@ -22,10 +21,6 @@ export function StepThree() {
   const [district, setDistrict] = useState("");
   const [street, setStreet] = useState("");
   const [number, setNumber] = useState("");
-
-  useEffect(() => {
-    console.log(userObj);
-  }, []);
 
   function handleCorporateName(event) {
     setCorporateName(event.target.value);
@@ -75,7 +70,12 @@ export function StepThree() {
   async function handleSearchCep(event) {
     event.preventDefault();
     try {
-      //await viaCepApi(cep);
+      const response = await api.getAddress(cep);
+      const address = response.data;
+      setCity(address.localidade);
+      setState(address.uf);
+      setDistrict(address.bairro);
+      setStreet(address.logradouro);
     } catch (error) {
       console.log(error);
     }
@@ -84,12 +84,11 @@ export function StepThree() {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    console.log("user id ", userObj.iduser);
+
     try {
-      await api.userSave(
-        userObj.name,
-        userObj.lastName,
-        userObj.email,
-        userObj.password,
+      await api.restaurantSave(
+        userObj.iduser,
         corporateName,
         fantasyName,
         cnpj,
@@ -100,6 +99,7 @@ export function StepThree() {
         street,
         number
       );
+      history.push("/criar-conta-4");
     } catch (error) {
       console.log(error);
     }
@@ -191,9 +191,7 @@ export function StepThree() {
               type="text"
             />
           </div>
-          <button className="button-blue">
-            Avançar
-          </button>
+          <button className="button-blue">Avançar</button>
         </form>
         <img
           className="icon-step-three"
