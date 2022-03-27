@@ -69,11 +69,10 @@ export function useSimplifoodApi() {
   }
 
   async function statusSession(tokenWpp) {
-    console.log("tokene enviado", tokenWpp);
     const response = await instance.post("/getStatusConnection", {
       token: tokenWpp,
     });
-    console.log(response);
+    return response.data;
   }
 
   return useCallback(

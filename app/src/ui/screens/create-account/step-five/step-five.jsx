@@ -2,7 +2,7 @@ import "./style.css";
 import "../../create-account/style.css";
 import IconStepFive from "../../../../assets/images/icon-step-five.svg";
 import IconOu from "../../../../assets/images/icon-ou.svg";
-import { QRCode, SidebarRight } from "../../../components";
+import { SidebarRight } from "../../../components";
 import { Redirect } from "react-router-dom";
 
 import { useHistory } from "react-router-dom";
@@ -15,7 +15,8 @@ export function StepFive() {
 
   const [tokenWpp, setTokenWpp] = useState({});
   const [qrcode, setQrcode] = useState("");
-  const [isConnected, setIsConnected] = useState({ redirect: false });
+  const [isRedirect, setIsRedirect] = useState({ redirect: false });
+  let isConnected = false;
 
   useEffect(() => {
     async function loadTokenWpp() {
@@ -31,26 +32,42 @@ export function StepFive() {
     loadTokenWpp();
   }, []);
 
+  useEffect(() => {}, [isConnected]);
+
   async function startSession() {
     try {
       const response = await api.startSession(tokenWpp);
       if (response.data.status === "QRCODE") {
         setQrcode(response.data.qrcode);
+        statusSessionTimer();
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function statusSession() {
+  async function statusSessionTimer() {
     try {
-      const response = await api.statusSession(tokenWpp);
-      if (response.data.status) {
-        setIsConnected({ redirect: true });
+      while (!isConnected) {
+        console.log("teste do while ", !isConnected.status);
+        console.log("dentro do while");
+        await Promise.all([await getStatusSession(), timeout(1000)]);
       }
+
+      setIsRedirect({ redirect: true });
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async function getStatusSession() {
+    const response = await api.statusSession(tokenWpp);
+    console.log("response tester final ", response);
+    isConnected = response.status;
+  }
+
+  function timeout(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   function handleStepFive() {
@@ -58,7 +75,7 @@ export function StepFive() {
   }
   return (
     <>
-      {isConnected.redirect && <Redirect to="/desktop" />}
+      {isRedirect.redirect && <Redirect to="/desktop" />}
       <div className="container-main">
         <div className="sidebar-left sidebar-left-step-five">
           <h1>Para integrar o WhatsApp do seu estabelecimento</h1>
@@ -83,7 +100,6 @@ export function StepFive() {
               </button>
             </div>
           )}
-          <button onClick={statusSession}>teste</button>
           <img
             className="icon-step-four"
             src={IconStepFive}
