@@ -38,7 +38,6 @@ public class WppConnectController {
 
     @PostMapping("/getStatusConnection")
     private ResponseEntity<StatusConnectionResponse> getStatusConnection(@RequestBody WPPTokenRequest wppTokenRequest){
-        System.out.println(wppTokenRequest.getToken());
         StatusConnectionResponse statusConnectionResponse = wppConnectService.getStatusConnection(wppTokenRequest.getToken());
         return statusConnectionResponse != null ? ResponseEntity.ok().body(statusConnectionResponse) : ResponseEntity.notFound().build();
     }
