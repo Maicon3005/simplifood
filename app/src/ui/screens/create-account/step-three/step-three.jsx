@@ -6,13 +6,13 @@ import IconStepThree from "../../../../assets/images/icon-step-three.svg";
 import { SidebarRight } from "../../../components";
 import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useViaCepApi } from "../../../../services/use-viacep-api";
+//import { useViaCepApi } from "../../../../services/use-viacep-api";
 import AuthContext from "../../../../context/auth";
 
 export function StepThree() {
   const context = useContext(AuthContext);
   const api = useSimplifoodApi();
-  const apiViaCep = useViaCepApi();
+  //const apiViaCep = useViaCepApi();
   const history = useHistory();
   const userObj = history.location.state;
 
@@ -72,7 +72,7 @@ export function StepThree() {
   }
 
   async function handleSearchCep(event) {
-    event.preventDefault();
+   /* event.preventDefault();
     try {
       const response = await apiViaCep.getCep(cep);
       const address = response.data;
@@ -82,7 +82,7 @@ export function StepThree() {
       setStreet(address.logradouro);
     } catch (error) {
       console.log(error);
-    }
+    }*/
   }
 
   async function handleSubmit(event) {

@@ -52,12 +52,10 @@ export function useSimplifoodApi() {
 
   async function postTokenWpp() {
     const response = await instance.post("/generatetoken", {});
-    console.log(response);
     return response;
   }
 
   async function startSession(tokenWpp) {
-    console.log("token app ", tokenWpp);
     const response = await instance.post("/startsession", {
       token: tokenWpp,
     });
@@ -66,8 +64,16 @@ export function useSimplifoodApi() {
 
   async function postQRCode(tokenWpp) {
     const response = await instance.post("/getqrcode", {
-      token: `Bearer ${tokenWpp}`,
+      token: tokenWpp,
     });
+  }
+
+  async function statusSession(tokenWpp) {
+    console.log("tokene enviado", tokenWpp);
+    const response = await instance.post("/getStatusConnection", {
+      token: tokenWpp,
+    });
+    console.log(response);
   }
 
   return useCallback(
@@ -79,6 +85,7 @@ export function useSimplifoodApi() {
       startSession,
       postTokenWpp,
       postQRCode,
+      statusSession,
     },
     []
   );

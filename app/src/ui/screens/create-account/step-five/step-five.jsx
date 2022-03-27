@@ -3,6 +3,7 @@ import "../../create-account/style.css";
 import IconStepFive from "../../../../assets/images/icon-step-five.svg";
 import IconOu from "../../../../assets/images/icon-ou.svg";
 import { QRCode, SidebarRight } from "../../../components";
+import { Redirect } from "react-router-dom";
 
 import { useHistory } from "react-router-dom";
 import { useSimplifoodApi } from "../../../../services/use-simplifood-api";
@@ -12,35 +13,85 @@ export function StepFive() {
   const api = useSimplifoodApi();
   const history = useHistory();
 
+  const [tokenWpp, setTokenWpp] = useState({});
+  const [qrcode, setQrcode] = useState("");
+  const [isConnected, setIsConnected] = useState({ redirect: false });
+
+  useEffect(() => {
+    async function loadTokenWpp() {
+      try {
+        const response = await api.postTokenWpp();
+        setTokenWpp(`Bearer ${response.data.token}`);
+        localStorage.setItem("@Wpp:token", response.data.token);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    loadTokenWpp();
+  }, []);
+
+  async function startSession() {
+    try {
+      const response = await api.startSession(tokenWpp);
+      if (response.data.status === "QRCODE") {
+        setQrcode(response.data.qrcode);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function statusSession() {
+    try {
+      const response = await api.statusSession(tokenWpp);
+      if (response.data.status) {
+        setIsConnected({ redirect: true });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function handleStepFive() {
     history.push("/criar-conta-5");
   }
   return (
-    <div className="container-main">
-      <div className="sidebar-left sidebar-left-step-five">
-        <h1>Para integrar o WhatsApp do seu estabelecimento</h1>
-        <p>
-          Utilize o leitor de QR CODE do WhatsApp de seu estabelecimento para se
-          registrar na plataforma Simplifood.
-        </p>
-        <div className="option-qrcode">
-          <QRCode />
+    <>
+      {isConnected.redirect && <Redirect to="/desktop" />}
+      <div className="container-main">
+        <div className="sidebar-left sidebar-left-step-five">
+          <h1>Para integrar o WhatsApp do seu estabelecimento</h1>
+          <p>
+            Utilize o leitor de QR CODE do WhatsApp de seu estabelecimento para
+            se registrar na plataforma Simplifood.
+          </p>
+          {qrcode ? (
+            <img src={qrcode} alt="Imagem QR code" />
+          ) : (
+            <div className="option-qrcode">
+              <button className="button-blue" onClick={startSession}>
+                Configurar QR Code
+              </button>
+              <img
+                src={IconOu}
+                className="divider-page divider-page-large"
+                alt="Icone de escolha do login"
+              />
+              <button className="button-white-blue" onClick={handleStepFive}>
+                Pular etapa
+              </button>
+            </div>
+          )}
+          <button onClick={statusSession}>teste</button>
           <img
-            src={IconOu}
-            className="divider-page divider-page-large"
-            alt="Icone de escolha do login"
+            className="icon-step-four"
+            src={IconStepFive}
+            alt="Passo um da criação de conta"
           />
-          <button className="button-white-blue" onClick={handleStepFive}>
-            Pular etapa
-          </button>
         </div>
-        <img
-          className="icon-step-four"
-          src={IconStepFive}
-          alt="Passo um da criação de conta"
-        />
+        <SidebarRight content="Com o nosso suporte você vai conseguir produzir muito mais em menos tempo!" />
       </div>
-      <SidebarRight content="Com o nosso suporte você vai conseguir produzir muito mais em menos tempo!" />
-    </div>
+    </>
   );
 }
