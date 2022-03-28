@@ -135,3 +135,18 @@ body {
   box-shadow: none;
   transition: 0.7s;
 }
+
+.title-pages-restaurant {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: 15px;
+}
+
+.show-itens-restaurant {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -6,3 +6,4 @@ export { StepTwo } from "../screens/create-account/step-two/step-two";
 export { StepThree } from "../screens/create-account/step-three/step-three";
 export { StepFour } from "../screens//create-account/step-four/step-four";
 export { StepFive } from "../screens/create-account/step-five/step-five";
+export { ShowCategory } from "./show-category/show-category";

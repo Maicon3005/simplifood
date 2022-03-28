@@ -1,14 +1,14 @@
-.container-menu{
+.container-menu {
     display: flex;
     align-items: center;
     background-color: #049DBF;
     width: 100%;
     height: 40px;
-    box-shadow: -2px 3px 13px -5px rgba(0,0,0,0.76);
+    box-shadow: -2px 3px 13px -5px rgba(0, 0, 0, 0.76);
     z-index: 1;
 }
 
-.logo-menu{
+.logo-menu {
     width: 11%;
     margin-left: 10px;
 }
