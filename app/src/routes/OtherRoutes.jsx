@@ -1,6 +1,8 @@
 import { BrowserRouter, Route } from "react-router-dom";
 
 import {
+  CreateCategory,
+  CreateProduct,
   Desktop,
   QRCodeConfigure,
   ShowCategory,
@@ -18,6 +20,8 @@ export function OtherRoutes() {
       <Route path="/criar-conta-4" component={StepFour} exact />
       <Route path="/criar-conta-5" component={StepFive} exact />
       <Route path="/mostrar-categorias" component={ShowCategory} exact />
+      <Route path="/criar-categoria" component={CreateCategory} exact />
+      <Route path="/criar-produto" component={CreateProduct} exact />
     </BrowserRouter>
   );
 }

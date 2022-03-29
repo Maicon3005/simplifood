@@ -5,8 +5,11 @@ import { useState } from "react";
 import BtnView from "../../../assets/images/btn-view-item.svg";
 import BtnAdd from "../../../assets/images/btn-add-item.svg";
 import BtnRemove from "../../../assets/images/btn-remove-item.svg";
+import { useHistory } from "react-router-dom";
 
 export function CategoryItem() {
+  const history = useHistory();
+
   const [name, setName] = useState("");
   const [primaryLetter, setPrimaryLetter] = useState("");
   const [qttProducts, setQttProducts] = useState("");
@@ -20,6 +23,11 @@ export function CategoryItem() {
   }, []);
 
   //fim teste
+
+  function handleAddProduct(event) {
+    history.push("/criar-produto");
+    event.preventDefault();
+  }
 
   function getPrimaryLetter() {
     const letter = name.substring(0, 1);
@@ -41,7 +49,7 @@ export function CategoryItem() {
         <button className="btn-item">
           <img src={BtnView} alt="Botão ver item" />
         </button>
-        <button className="btn-item">
+        <button className="btn-item" onClick={handleAddProduct}>
           <img src={BtnAdd} alt="Botão ver item" />
         </button>
         <button className="btn-item">
