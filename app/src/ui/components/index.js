@@ -4,3 +4,5 @@ export { SidebarRight } from "./sidebar-right/sidebar-right";
 export { QRCode } from "./qrcode/qrcode";
 export { CategoryItem } from "./category-item/category-item";
 export { ProductItem } from "./product-item/product-item";
+export { Menu } from "./menu/menu";
+export { Order } from "./order/order";

@@ -37,3 +37,25 @@
 .show-component {
     display: none;
 }
+
+.container-menu input {
+    display: none;
+}
+
+.container-menu label img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.container-menu label img:hover {
+    cursor: pointer;
+}
+
+.container-menu-left {
+    margin-left: 12.5px;
+}
+
+.container-menu-left img{
+    width: 100px;
+}
+
