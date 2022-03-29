@@ -6,6 +6,7 @@ import {
   Desktop,
   QRCodeConfigure,
   ShowCategory,
+  ShowProducts,
   StepFive,
   StepFour,
   StepThree,
@@ -22,6 +23,7 @@ export function OtherRoutes() {
       <Route path="/mostrar-categorias" component={ShowCategory} exact />
       <Route path="/criar-categoria" component={CreateCategory} exact />
       <Route path="/criar-produto" component={CreateProduct} exact />
+      <Route path="/mostrar-produtos" component={ShowProducts} exact />
     </BrowserRouter>
   );
 }

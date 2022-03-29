@@ -29,6 +29,11 @@ export function CategoryItem() {
     event.preventDefault();
   }
 
+  function handleShowProducts(event) {
+    history.push("/mostrar-produtos");
+    event.preventDefault();
+  }
+
   function getPrimaryLetter() {
     const letter = name.substring(0, 1);
     setPrimaryLetter(letter);
@@ -47,7 +52,11 @@ export function CategoryItem() {
       </div>
       <div className="container-commands">
         <button className="btn-item">
-          <img src={BtnView} alt="Botão ver item" />
+          <img
+            src={BtnView}
+            alt="Botão ver item"
+            onClick={handleShowProducts}
+          />
         </button>
         <button className="btn-item" onClick={handleAddProduct}>
           <img src={BtnAdd} alt="Botão ver item" />
