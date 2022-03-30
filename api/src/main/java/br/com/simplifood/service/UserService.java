@@ -1,6 +1,6 @@
 package br.com.simplifood.service;
 
-import br.com.simplifood.mapper.UserToModelMapper;
+import br.com.simplifood.mapper.UserMapper;
 import br.com.simplifood.model.UserModel;
 import br.com.simplifood.repository.UserRepository;
 import br.com.simplifood.representation.user.CreateUserRequest;
@@ -21,8 +21,8 @@ public class UserService {
     private UserRepository userRepository;
 
     public CreateUserResponse saveUser(CreateUserRequest createUserRequest){
-        UserToModelMapper userToModelMapper = new UserToModelMapper(createUserRequest, encoder);
-        UserModel userModel = userToModelMapper.toModel();
+        UserMapper userMapper = new UserMapper(createUserRequest, encoder);
+        UserModel userModel = userMapper.toModel();
 
         CreateUserResponse createUserResponse =  new CreateUserResponse(userRepository.save(userModel).getId());
         return createUserResponse;

@@ -4,12 +4,12 @@ import br.com.simplifood.model.UserModel;
 import br.com.simplifood.representation.user.CreateUserRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class UserToModelMapper {
+public class UserMapper {
 
     private UserModel userModel;
     private final PasswordEncoder encoder;
 
-    public UserToModelMapper(CreateUserRequest createUserRequest, PasswordEncoder encoder) {
+    public UserMapper(CreateUserRequest createUserRequest, PasswordEncoder encoder) {
         this.encoder = encoder;
         this.userModel = new UserModel();
         this.userModel.setName(createUserRequest.getName());

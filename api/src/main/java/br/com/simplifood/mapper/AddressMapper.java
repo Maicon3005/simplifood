@@ -3,11 +3,11 @@ package br.com.simplifood.mapper;
 import br.com.simplifood.model.AddressModel;
 import br.com.simplifood.representation.restaurant.CreateRestaurantRequest;
 
-public class AddressToModelMapper {
+public class AddressMapper {
 
     private AddressModel addressModel;
 
-        public AddressToModelMapper(CreateRestaurantRequest createRestaurantRequest){
+        public AddressMapper(CreateRestaurantRequest createRestaurantRequest){
         this.addressModel = new AddressModel();
         this.addressModel.setCep(createRestaurantRequest.getCep());
         this.addressModel.setCity(createRestaurantRequest.getCity());

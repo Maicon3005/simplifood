@@ -7,17 +7,16 @@ import BtnAdd from "../../../assets/images/btn-add-item.svg";
 import BtnRemove from "../../../assets/images/btn-remove-item.svg";
 import { useHistory } from "react-router-dom";
 
-export function CategoryItem() {
+export function CategoryItem({ ...props }) {
   const history = useHistory();
 
-  const [name, setName] = useState("");
+  const { id, name } = props;
   const [primaryLetter, setPrimaryLetter] = useState("");
   const [qttProducts, setQttProducts] = useState("");
 
   //testes
 
   useEffect(() => {
-    setName("Bebidas");
     getPrimaryLetter();
     setQttProducts(2);
   }, []);

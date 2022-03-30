@@ -83,6 +83,11 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function getAllCategories() {
+    const response = await instance.get("/category/getall");
+    return response.data;
+  }
+
   return useCallback(
     {
       login,
@@ -93,6 +98,7 @@ export function useSimplifoodApi() {
       startSession,
       statusSession,
       createCategory,
+      getAllCategories,
     },
     []
   );
