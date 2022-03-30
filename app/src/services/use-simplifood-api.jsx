@@ -107,6 +107,11 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function getAllProducts(idCategory) {
+    const response = await instance.get(`/product/getall/${idCategory}`);
+    return response.data;
+  }
+
   return useCallback(
     {
       login,
@@ -119,6 +124,7 @@ export function useSimplifoodApi() {
       createCategory,
       getAllCategories,
       createProduct,
+      getAllProducts,
     },
     []
   );

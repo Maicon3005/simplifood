@@ -25,7 +25,8 @@ export function CategoryItem({ ...props }) {
 
   function handleShowProducts(event) {
     event.preventDefault();
-    history.push("/mostrar-produtos");
+    const location = { pathname: "/mostrar-produtos", idCategory: id , nameCategory: name  };
+    history.push(location);
   }
 
   function getPrimaryLetter() {

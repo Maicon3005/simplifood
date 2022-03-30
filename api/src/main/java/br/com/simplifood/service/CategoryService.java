@@ -46,8 +46,6 @@ public class CategoryService {
                 .stream()
                 .map( x -> new CategoryMapper(x).toResponse()).collect(Collectors.toList());
 
-        //System.out.println("quantidade de produtos" + productService.getQuantityOfProductsInCategory(1));
-
         return new AllCategoriesResponse(categoryResponses);
     }
 }
