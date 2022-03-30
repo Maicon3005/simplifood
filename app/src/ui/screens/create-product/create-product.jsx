@@ -2,8 +2,14 @@ import "./style.css";
 
 import { useState } from "react";
 import { TopMenu, SidebarRight } from "../../components/";
+import { useSimplifoodApi } from "../../../services/use-simplifood-api";
+import { useHistory } from "react-router-dom";
 
 export function CreateProduct() {
+  const api = useSimplifoodApi();
+  const history = useHistory();
+  const categoryId = history.location.state;
+
   const [nameProduct, setNameProduct] = useState();
   const [qttProduct, setQttProduct] = useState();
   const [price, setPrice] = useState();
@@ -37,6 +43,21 @@ export function CreateProduct() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    try {
+      const response = await api.createProduct(
+        categoryId,
+        nameProduct,
+        qttProduct,
+        price,
+        description,
+        imageUrl
+      );
+      console.log(response);
+      history.push("/mostrar-categorias");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

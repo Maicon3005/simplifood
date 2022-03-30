@@ -20,4 +20,6 @@ public class CategoryModel {
     private Integer id;
 
     private String categoryName;
+
+    private int quantityProducts;
 }

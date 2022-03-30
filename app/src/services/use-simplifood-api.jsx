@@ -88,6 +88,25 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function createProduct(
+    idCategory,
+    name,
+    quantity,
+    price,
+    description,
+    imageUrl
+  ) {
+    const response = await instance.post("/product/create", {
+      idCategory: idCategory,
+      name: name,
+      quantity: quantity,
+      price: price,
+      description: description,
+      imageUrl: imageUrl,
+    });
+    return response.data;
+  }
+
   return useCallback(
     {
       login,
@@ -99,6 +118,7 @@ export function useSimplifoodApi() {
       statusSession,
       createCategory,
       getAllCategories,
+      createProduct,
     },
     []
   );

@@ -20,11 +20,18 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductService productService;
+
     public CreateCategoryResponse saveCategory(CreateCategoryRequest createCategoryRequest){
         CategoryMapper categoryMapper = new CategoryMapper(createCategoryRequest);
         CategoryModel categoryModel = categoryMapper.toModel();
         CreateCategoryResponse createCategoryResponse = new CreateCategoryResponse(categoryRepository.save(categoryModel).getId());
         return createCategoryResponse;
+    }
+
+    public CategoryModel getCategoryModel(Integer idCategory){
+        return categoryRepository.getById(idCategory);
     }
 
     public AllCategoriesResponse getAllCategories(){
@@ -38,6 +45,8 @@ public class CategoryService {
         List<CategoryResponse> categoryResponses = categoryModels
                 .stream()
                 .map( x -> new CategoryMapper(x).toResponse()).collect(Collectors.toList());
+
+        //System.out.println("quantidade de produtos" + productService.getQuantityOfProductsInCategory(1));
 
         return new AllCategoriesResponse(categoryResponses);
     }

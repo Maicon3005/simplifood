@@ -10,27 +10,22 @@ import { useHistory } from "react-router-dom";
 export function CategoryItem({ ...props }) {
   const history = useHistory();
 
-  const { id, name } = props;
+  const { id, name, qttProducts } = props;
   const [primaryLetter, setPrimaryLetter] = useState("");
-  const [qttProducts, setQttProducts] = useState("");
-
-  //testes
 
   useEffect(() => {
     getPrimaryLetter();
-    setQttProducts(2);
   }, []);
 
-  //fim teste
-
   function handleAddProduct(event) {
-    history.push("/criar-produto");
     event.preventDefault();
+    const location = { pathname: "/criar-produto", state: id };
+    history.push(location);
   }
 
   function handleShowProducts(event) {
-    history.push("/mostrar-produtos");
     event.preventDefault();
+    history.push("/mostrar-produtos");
   }
 
   function getPrimaryLetter() {
@@ -47,7 +42,11 @@ export function CategoryItem({ ...props }) {
         <h3>{name}</h3>
       </div>
       <div className="qtt-products">
-        <p>{`${qttProducts} Produtos`}</p>
+        <p>
+          {qttProducts <= 1
+            ? `${qttProducts} Produto`
+            : `${qttProducts} Produtos`}
+        </p>
       </div>
       <div className="container-commands">
         <button className="btn-item">

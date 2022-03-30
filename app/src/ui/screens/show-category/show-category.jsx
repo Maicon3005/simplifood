@@ -14,6 +14,7 @@ export function ShowCategory() {
   useEffect(() => {
     async function loadAllCategories() {
       const response = await api.getAllCategories();
+      console.log(response.categories);
       setAllCategories(response.categories);
     }
 
@@ -31,13 +32,18 @@ export function ShowCategory() {
         <h1>Categorias e Produtos</h1>
       </div>
       <ul className="item-default">
-        {allCategories.map((category) => (
-          <CategoryItem
-            key={category.id}
-            id={category.id}
-            name={category.categoryName}
-          />
-        ))}
+        {!allCategories ? (
+          <h3>Você não possui nenhuma categoria cadastrada</h3>
+        ) : (
+          allCategories.map((category) => (
+            <CategoryItem
+              key={category.id}
+              id={category.id}
+              name={category.categoryName}
+              qttProducts={category.quantityProduct}
+            />
+          ))
+        )}
       </ul>
     </div>
   );

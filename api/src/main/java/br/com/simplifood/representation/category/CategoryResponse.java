@@ -11,5 +11,6 @@ public class CategoryResponse {
 
     private Integer id;
     private String categoryName;
+    private int quantityProduct;
 
 }

@@ -15,7 +15,7 @@ public class CategoryMapper {
     }
 
     public CategoryMapper(CategoryModel categoryModel) {
-        this.categoryResponse = new CategoryResponse(categoryModel.getId(), categoryModel.getCategoryName());
+        this.categoryResponse = new CategoryResponse(categoryModel.getId(), categoryModel.getCategoryName(), categoryModel.getQuantityProducts());
     }
 
     public CategoryModel toModel() {
