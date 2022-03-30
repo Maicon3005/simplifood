@@ -7,8 +7,8 @@ import br.com.simplifood.model.RestaurantModel;
 import br.com.simplifood.model.UserModel;
 import br.com.simplifood.repository.AddressRepository;
 import br.com.simplifood.repository.RestaurantRepository;
-import br.com.simplifood.representation.CreateRestaurantRequest;
-import br.com.simplifood.representation.CreateRestaurantResponse;
+import br.com.simplifood.representation.restaurant.CreateRestaurantRequest;
+import br.com.simplifood.representation.restaurant.CreateRestaurantResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

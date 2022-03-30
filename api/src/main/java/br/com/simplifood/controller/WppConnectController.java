@@ -1,9 +1,9 @@
 package br.com.simplifood.controller;
 
-import br.com.simplifood.representation.QRCodeResponse;
-import br.com.simplifood.representation.StartSessionResponse;
-import br.com.simplifood.representation.StatusConnectionResponse;
-import br.com.simplifood.representation.WPPTokenRequest;
+import br.com.simplifood.representation.wppapi.QRCodeResponse;
+import br.com.simplifood.representation.wppapi.StartSessionResponse;
+import br.com.simplifood.representation.wppapi.StatusConnectionResponse;
+import br.com.simplifood.representation.wppapi.WPPTokenRequest;
 import br.com.simplifood.service.WppConnectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

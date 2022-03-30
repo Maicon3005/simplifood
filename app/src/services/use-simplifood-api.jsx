@@ -68,16 +68,17 @@ export function useSimplifoodApi() {
     });
     return response;
   }
-/*
-  async function postQRCode(tokenWpp) {
-    const response = await instance.post("/getqrcode", {
-      token: tokenWpp,
-    });
-  }*/
 
   async function statusSession(tokenWpp) {
     const response = await instance.post("/getStatusConnection", {
       token: tokenWpp,
+    });
+    return response.data;
+  }
+
+  async function createCategory(nameCategory) {
+    const response = await instance.post("/category/create", {
+      nameCategory: nameCategory,
     });
     return response.data;
   }
@@ -91,6 +92,7 @@ export function useSimplifoodApi() {
       getAddress,
       startSession,
       statusSession,
+      createCategory,
     },
     []
   );

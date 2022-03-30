@@ -1,4 +1,4 @@
-package br.com.simplifood.representation;
+package br.com.simplifood.representation.cep;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class WPPTokenRequest {
-    String token;
+public class FindCepRequest {
+
+    private String cep;
 }

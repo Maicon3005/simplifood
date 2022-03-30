@@ -1,4 +1,4 @@
-package br.com.simplifood.representation;
+package br.com.simplifood.representation.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateRestaurantResponse {
+public class CreateCategoryResponse {
 
-    private Integer idRestaurant;
+    private Integer idCategory;
+
 }

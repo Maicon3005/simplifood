@@ -1,4 +1,4 @@
-package br.com.simplifood.representation;
+package br.com.simplifood.representation.restaurant;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

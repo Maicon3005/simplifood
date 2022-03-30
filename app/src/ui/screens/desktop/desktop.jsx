@@ -10,10 +10,9 @@ export function Desktop() {
         <h1>Área de Trabalho</h1>
       </div>
       <div className="panel-order">
-        <Order />
-        <Order />
-        <Order />
-        <Order />
+        <div className="scroller">
+          <Order />
+        </div>
       </div>
     </>
   );

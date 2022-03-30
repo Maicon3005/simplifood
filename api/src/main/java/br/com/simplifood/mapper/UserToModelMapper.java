@@ -1,7 +1,7 @@
 package br.com.simplifood.mapper;
 
 import br.com.simplifood.model.UserModel;
-import br.com.simplifood.representation.CreateUserRequest;
+import br.com.simplifood.representation.user.CreateUserRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserToModelMapper {

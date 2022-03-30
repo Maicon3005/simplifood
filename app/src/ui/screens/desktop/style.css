@@ -1,5 +1,5 @@
 .container-desktop {
-    margin-top: 45px;
+    margin: 50px 0 10px 0;
     width: 100%;
     height: 40px;
 }
@@ -8,5 +8,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
+    font-size: 30px;
 }
+
+.panel-order {
+    width: 100%;
+    height: 100%;
+}
+
+.scroller {
+    height: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/*
+.panel-order {
+    width: auto;
+    background-color: aqua;
+    position: absolute;
+}*/

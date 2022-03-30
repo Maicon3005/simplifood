@@ -1,9 +1,8 @@
 package br.com.simplifood.controller;
 
-import br.com.simplifood.model.UserModel;
 import br.com.simplifood.repository.UserRepository;
-import br.com.simplifood.representation.CreateUserRequest;
-import br.com.simplifood.representation.CreateUserResponse;
+import br.com.simplifood.representation.user.CreateUserRequest;
+import br.com.simplifood.representation.user.CreateUserResponse;
 import br.com.simplifood.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

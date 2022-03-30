@@ -1,7 +1,7 @@
 package br.com.simplifood.mapper;
 
 import br.com.simplifood.model.AddressModel;
-import br.com.simplifood.representation.CreateRestaurantRequest;
+import br.com.simplifood.representation.restaurant.CreateRestaurantRequest;
 
 public class AddressToModelMapper {
 

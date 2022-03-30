@@ -1,9 +1,15 @@
+import "./style.css";
+
 import { useState } from "react";
 import { SidebarRight } from "../../components";
 import { TopMenu } from "../../components/top-menu/top-menu";
-import "./style.css";
+import { useSimplifoodApi } from "../../../services/use-simplifood-api";
+import { useHistory } from "react-router-dom";
 
 export function CreateCategory() {
+  const api = useSimplifoodApi();
+  const history = useHistory();
+
   const [categoryName, setCategoryName] = useState("");
 
   function handleCategoryName(event) {
@@ -13,6 +19,14 @@ export function CreateCategory() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    try {
+      const response = await api.createCategory(categoryName);
+      console.log(response);
+      history.push("/mostrar-categorias");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
