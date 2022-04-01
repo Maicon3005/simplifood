@@ -10,3 +10,4 @@ export { ShowCategory } from "./show-category/show-category";
 export { CreateCategory } from "./create-category/create-category";
 export { CreateProduct } from "./create-product/create-product";
 export { ShowProducts } from "./show-products/show-products";
+export { UpdateProduct } from "./update-product/update-product";

@@ -1,20 +1,40 @@
 import "./style.css";
 
-import { useState } from "react";
-import { TopMenu, SidebarRight } from "../../components/";
+import { useEffect, useState } from "react";
+import { TopMenu, SidebarRight } from "../../components";
 import { useSimplifoodApi } from "../../../services/use-simplifood-api";
 import { useHistory } from "react-router-dom";
 
-export function CreateProduct() {
+export function UpdateProduct() {
   const api = useSimplifoodApi();
   const history = useHistory();
-  const categoryId = history.location.state;
+  const categoryId = history.location.idCategory;
+  const productId = history.location.idProduct;
+  const categoryName = history.location.categoryName;
 
   const [nameProduct, setNameProduct] = useState("");
   const [qttProduct, setQttProduct] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    async function loadProduct() {
+      try {
+        const response = await api.getProduct(productId);
+        console.log(response);
+        setNameProduct(response.productName);
+        setQttProduct(response.quantity);
+        setPrice(response.price);
+        setDescription(response.description);
+        setImageUrl(response.urlImage);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    loadProduct();
+  }, [api, productId]);
 
   function handleNameProduct(event) {
     setNameProduct(event.target.value);
@@ -44,8 +64,11 @@ export function CreateProduct() {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    console.log(categoryId);
+
     try {
-      const response = await api.createProduct(
+      const response = await api.updateProduct(
+        productId,
         categoryId,
         nameProduct,
         qttProduct,
@@ -54,7 +77,15 @@ export function CreateProduct() {
         imageUrl
       );
       console.log(response);
-      history.push("/mostrar-categorias");
+      history.push("/mostrar-produtos");
+
+      const location = {
+        pathname: "/mostrar-produtos",
+        idCategory: categoryId,
+        nameCategory: categoryName,
+      };
+
+      history.push(location);
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +96,7 @@ export function CreateProduct() {
       <TopMenu />
       <div className="container-main">
         <div className="container-create-product">
-          <h1>Cadastro de Produto</h1>
+          <h1>Atualizar Produto</h1>
           <form onSubmit={handleSubmit} className="form-create-product">
             <input
               id="name"
@@ -114,7 +145,7 @@ export function CreateProduct() {
               type="text"
               required
             />
-            <button className="button-blue">Cadastrar</button>
+            <button className="button-blue">Atualizar</button>
           </form>
         </div>
         <SidebarRight />

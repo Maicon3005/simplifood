@@ -107,8 +107,39 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function getProduct(idCategory) {
+    const response = await instance.get(`/product/get/${idCategory}`);
+    return response.data;
+  }
+
   async function getAllProducts(idCategory) {
     const response = await instance.get(`/product/getall/${idCategory}`);
+    return response.data;
+  }
+
+  async function deleteProduct(idProduct) {
+    const response = await instance.delete(`/product/delete/${idProduct}`);
+    return response;
+  }
+
+  async function updateProduct(
+    idProduct,
+    idCategory,
+    name,
+    quantity,
+    price,
+    description,
+    imageUrl
+  ) {
+    const response = await instance.put("/product/update", {
+      idProduct: idProduct,
+      idCategory: idCategory,
+      name: name,
+      quantity: quantity,
+      price: price,
+      description: description,
+      imageUrl: imageUrl,
+    });
     return response.data;
   }
 
@@ -125,6 +156,9 @@ export function useSimplifoodApi() {
       getAllCategories,
       createProduct,
       getAllProducts,
+      deleteProduct,
+      getProduct,
+      updateProduct,
     },
     []
   );

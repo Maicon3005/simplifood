@@ -1,17 +1,44 @@
 import "./style.css";
 
-import { useEffect, useState } from "react";
 import BtnRemove from "../../../assets/images/btn-remove-item.svg";
 import BtnEdit from "../../../assets/images/btn-edit-item.svg";
 import { useHistory } from "react-router-dom";
+import { useSimplifoodApi } from "../../../services/use-simplifood-api";
 
 export function ProductItem({ ...props }) {
-  const { id, urlImage, productName, quantity, price, description } = props;
+  const {
+    id,
+    urlImage,
+    productName,
+    quantity,
+    price,
+    description,
+    categoryId,
+    categoryName,
+  } = props;
   const history = useHistory();
+  const api = useSimplifoodApi();
 
   function handleEdit(event) {
-    history.push("/criar-produto");
     event.preventDefault();
+
+    const location = {
+      pathname: "/atualizar-produto",
+      idCategory: categoryId,
+      idProduct: id,
+      categoryName: categoryName,
+    };
+    history.push(location);
+  }
+
+  async function handleDelete(event) {
+    event.preventDefault();
+    try {
+      const response = await api.deleteProduct(id);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -30,7 +57,7 @@ export function ProductItem({ ...props }) {
             <button className="btn-item" onClick={handleEdit}>
               <img src={BtnEdit} alt="Botão editar item" />
             </button>
-            <button className="btn-item">
+            <button className="btn-item" onClick={handleDelete}>
               <img src={BtnRemove} alt="Botão remover item" />
             </button>
           </div>

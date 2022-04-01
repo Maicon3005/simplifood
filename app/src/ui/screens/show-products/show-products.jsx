@@ -4,11 +4,13 @@ import { TopMenu, ProductItem } from "../../components";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSimplifoodApi } from "../../../services/use-simplifood-api";
+import { useIsMounted } from "../../../hooks/use-is-mounted";
 
 export function ShowProducts() {
   const history = useHistory();
   const categoryId = history.location.idCategory;
   const categoryName = history.location.nameCategory;
+  const isMounted = useIsMounted();
   const api = useSimplifoodApi();
 
   const [allProducts, setAllProducts] = useState([]);
@@ -17,13 +19,16 @@ export function ShowProducts() {
     async function loadProducts() {
       try {
         const response = await api.getAllProducts(categoryId);
-        setAllProducts(response.productResponses);
+        if (isMounted.current) {
+          setAllProducts(response.productResponses);
+        }
       } catch (error) {
         console.log(error);
       }
     }
-    loadProducts();
-  });
+
+    categoryId && loadProducts();
+  }, [categoryId, api, isMounted]);
 
   return (
     <>
@@ -39,6 +44,8 @@ export function ShowProducts() {
           allProducts.map((product) => (
             <ProductItem
               key={product.id}
+              categoryId={categoryId}
+              categoryName={categoryName}
               id={product.id}
               urlImage={product.urlImage}
               productName={product.productName}

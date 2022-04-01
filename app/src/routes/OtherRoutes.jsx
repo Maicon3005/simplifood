@@ -10,6 +10,7 @@ import {
   StepFive,
   StepFour,
   StepThree,
+  UpdateProduct,
 } from "../ui/screens";
 
 export function OtherRoutes() {
@@ -24,6 +25,7 @@ export function OtherRoutes() {
       <Route path="/criar-categoria" component={CreateCategory} exact />
       <Route path="/criar-produto" component={CreateProduct} exact />
       <Route path="/mostrar-produtos" component={ShowProducts} exact />
+      <Route path="/atualizar-produto" component={UpdateProduct} exact />
     </BrowserRouter>
   );
 }
