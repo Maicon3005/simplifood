@@ -26,4 +26,10 @@ public class CategoryController {
         AllCategoriesResponse allCategoriesResponse = categoryService.getAllCategories();
         return allCategoriesResponse != null ? ResponseEntity.ok().body(allCategoriesResponse) : ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/delete/{idCategory}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Integer idCategory){
+        boolean result = categoryService.deleteCategory(idCategory);
+        return result ? ResponseEntity.ok().build() :ResponseEntity.notFound().build();
+    }
 }

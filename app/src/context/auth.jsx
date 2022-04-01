@@ -23,8 +23,15 @@ export function AuthProvider({ children }) {
       setIsAuthenticated(true);
     }
   }
+
+  function Logout() {
+    setIsAuthenticated(false);
+    localStorage.clear();
+  }
   return (
-    <AuthContext.Provider value={{ signed: Boolean(isAuthenticated), Login }}>
+    <AuthContext.Provider
+      value={{ signed: Boolean(isAuthenticated), Login, Logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

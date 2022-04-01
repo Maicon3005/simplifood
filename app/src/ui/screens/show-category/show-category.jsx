@@ -12,14 +12,14 @@ export function ShowCategory() {
   const [allCategories, setAllCategories] = useState([]);
 
   useEffect(() => {
-    async function loadAllCategories() {
-      const response = await api.getAllCategories();
-      console.log(response.categories);
-      setAllCategories(response.categories);
-    }
-
     loadAllCategories();
   }, [api]);
+
+  async function loadAllCategories() {
+    const response = await api.getAllCategories();
+    console.log(response.categories);
+    setAllCategories(response.categories);
+  }
 
   function handleOnClickAdd() {
     history.push("/criar-categoria");
@@ -41,6 +41,7 @@ export function ShowCategory() {
               id={category.id}
               name={category.categoryName}
               qttProducts={category.quantityProduct}
+              loadAllCategories={loadAllCategories}
             />
           ))
         )}

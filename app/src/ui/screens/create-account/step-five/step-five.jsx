@@ -82,8 +82,8 @@ export function StepFive() {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  function handleStepFive() {
-    history.push("/criar-conta-5");
+  function handleSkipStep() {
+    history.push("/desktop");
   }
   return (
     <>
@@ -107,7 +107,7 @@ export function StepFive() {
                 className="divider-page divider-page-large"
                 alt="Icone de escolha do login"
               />
-              <button className="button-white-blue" onClick={handleStepFive}>
+              <button className="button-white-blue" onClick={handleSkipStep}>
                 Pular etapa
               </button>
             </div>

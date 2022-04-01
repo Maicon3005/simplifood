@@ -28,7 +28,10 @@
 }
 
 .product-image img {
-    width: 60%;
+    max-width:100%;
+    max-height:70px;
+    width: auto;
+    height: auto;
 }
 
 .content-product {

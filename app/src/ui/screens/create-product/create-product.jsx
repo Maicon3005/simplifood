@@ -117,7 +117,7 @@ export function CreateProduct() {
             <button className="button-blue">Cadastrar</button>
           </form>
         </div>
-        <SidebarRight />
+        <SidebarRight content="Simplifique! Torne o seu dia a dia e de seus clientes mais simples com o Simplifood"/>
       </div>
     </>
   );

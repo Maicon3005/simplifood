@@ -47,7 +47,7 @@ export function CreateCategory() {
             <button className="button-blue">Cadastrar</button>
           </form>
         </div>
-        <SidebarRight />
+        <SidebarRight content="Mais agilidade para você e seus clientes. Com poucos cliques é possível criar um cardápio!" />
       </div>
     </>
   );

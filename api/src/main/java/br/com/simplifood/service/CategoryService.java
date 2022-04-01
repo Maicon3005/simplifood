@@ -48,4 +48,14 @@ public class CategoryService {
 
         return new AllCategoriesResponse(categoryResponses);
     }
+
+    public boolean deleteCategory(Integer idCategory){
+        CategoryModel categoryModel = categoryRepository.getById(idCategory);
+
+        if (categoryModel != null){
+            categoryRepository.delete(categoryModel);
+            return true;
+        }
+        return false;
+    }
 }

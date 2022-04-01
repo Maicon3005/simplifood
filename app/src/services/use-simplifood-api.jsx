@@ -88,6 +88,11 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function deleteCategory(idCategory) {
+    const response = await instance.delete(`/category/delete/${idCategory}`);
+    return response;
+  }
+
   async function createProduct(
     idCategory,
     name,
@@ -159,6 +164,7 @@ export function useSimplifoodApi() {
       deleteProduct,
       getProduct,
       updateProduct,
+      deleteCategory,
     },
     []
   );

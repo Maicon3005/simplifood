@@ -26,6 +26,7 @@ export function OtherRoutes() {
       <Route path="/criar-produto" component={CreateProduct} exact />
       <Route path="/mostrar-produtos" component={ShowProducts} exact />
       <Route path="/atualizar-produto" component={UpdateProduct} exact />
+      <Route path="/configurar-qr-code" component={QRCodeConfigure} exact />
     </BrowserRouter>
   );
 }

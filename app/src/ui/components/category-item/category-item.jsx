@@ -6,16 +6,18 @@ import BtnView from "../../../assets/images/btn-view-item.svg";
 import BtnAdd from "../../../assets/images/btn-add-item.svg";
 import BtnRemove from "../../../assets/images/btn-remove-item.svg";
 import { useHistory } from "react-router-dom";
+import { useSimplifoodApi } from "../../../services/use-simplifood-api";
 
 export function CategoryItem({ ...props }) {
   const history = useHistory();
 
-  const { id, name, qttProducts } = props;
+  const { id, name, qttProducts, loadAllCategories } = props;
   const [primaryLetter, setPrimaryLetter] = useState("");
+  const api = useSimplifoodApi();
 
   useEffect(() => {
     getPrimaryLetter();
-  }, []);
+  }, [api, getPrimaryLetter]);
 
   function handleAddProduct(event) {
     event.preventDefault();
@@ -23,9 +25,24 @@ export function CategoryItem({ ...props }) {
     history.push(location);
   }
 
+  async function handleDeleteCategory(event) {
+    event.preventDefault();
+    try {
+      const response = await api.deleteCategory(id);
+      console.log(response);
+      loadAllCategories();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function handleShowProducts(event) {
     event.preventDefault();
-    const location = { pathname: "/mostrar-produtos", idCategory: id , nameCategory: name  };
+    const location = {
+      pathname: "/mostrar-produtos",
+      idCategory: id,
+      nameCategory: name,
+    };
     history.push(location);
   }
 
@@ -60,7 +77,7 @@ export function CategoryItem({ ...props }) {
         <button className="btn-item" onClick={handleAddProduct}>
           <img src={BtnAdd} alt="Botão ver item" />
         </button>
-        <button className="btn-item">
+        <button className="btn-item" onClick={handleDeleteCategory}>
           <img src={BtnRemove} alt="Botão ver item" />
         </button>
       </div>
