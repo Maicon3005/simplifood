@@ -68,16 +68,82 @@ export function useSimplifoodApi() {
     });
     return response;
   }
-/*
-  async function postQRCode(tokenWpp) {
-    const response = await instance.post("/getqrcode", {
-      token: tokenWpp,
-    });
-  }*/
 
   async function statusSession(tokenWpp) {
     const response = await instance.post("/getStatusConnection", {
       token: tokenWpp,
+    });
+    return response.data;
+  }
+
+  async function createCategory(nameCategory) {
+    const response = await instance.post("/category/create", {
+      nameCategory: nameCategory,
+    });
+    return response.data;
+  }
+
+  async function getAllCategories() {
+    const response = await instance.get("/category/getall");
+    return response.data;
+  }
+
+  async function deleteCategory(idCategory) {
+    const response = await instance.delete(`/category/delete/${idCategory}`);
+    return response;
+  }
+
+  async function createProduct(
+    idCategory,
+    name,
+    quantity,
+    price,
+    description,
+    imageUrl
+  ) {
+    const response = await instance.post("/product/create", {
+      idCategory: idCategory,
+      name: name,
+      quantity: quantity,
+      price: price,
+      description: description,
+      imageUrl: imageUrl,
+    });
+    return response.data;
+  }
+
+  async function getProduct(idCategory) {
+    const response = await instance.get(`/product/get/${idCategory}`);
+    return response.data;
+  }
+
+  async function getAllProducts(idCategory) {
+    const response = await instance.get(`/product/getall/${idCategory}`);
+    return response.data;
+  }
+
+  async function deleteProduct(idProduct) {
+    const response = await instance.delete(`/product/delete/${idProduct}`);
+    return response;
+  }
+
+  async function updateProduct(
+    idProduct,
+    idCategory,
+    name,
+    quantity,
+    price,
+    description,
+    imageUrl
+  ) {
+    const response = await instance.put("/product/update", {
+      idProduct: idProduct,
+      idCategory: idCategory,
+      name: name,
+      quantity: quantity,
+      price: price,
+      description: description,
+      imageUrl: imageUrl,
     });
     return response.data;
   }
@@ -91,6 +157,14 @@ export function useSimplifoodApi() {
       getAddress,
       startSession,
       statusSession,
+      createCategory,
+      getAllCategories,
+      createProduct,
+      getAllProducts,
+      deleteProduct,
+      getProduct,
+      updateProduct,
+      deleteCategory,
     },
     []
   );

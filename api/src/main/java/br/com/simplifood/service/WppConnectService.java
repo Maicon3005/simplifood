@@ -1,8 +1,8 @@
 package br.com.simplifood.service;
 
-import br.com.simplifood.representation.QRCodeResponse;
-import br.com.simplifood.representation.StartSessionResponse;
-import br.com.simplifood.representation.StatusConnectionResponse;
+import br.com.simplifood.representation.wppapi.QRCodeResponse;
+import br.com.simplifood.representation.wppapi.StartSessionResponse;
+import br.com.simplifood.representation.wppapi.StatusConnectionResponse;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

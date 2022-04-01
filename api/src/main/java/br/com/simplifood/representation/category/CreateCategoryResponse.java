@@ -1,0 +1,14 @@
+package br.com.simplifood.representation.category;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateCategoryResponse {
+
+    private Integer idCategory;
+
+}

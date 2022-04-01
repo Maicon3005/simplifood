@@ -1,6 +1,6 @@
 package br.com.simplifood.service;
 
-import br.com.simplifood.representation.FindCepResponse;
+import br.com.simplifood.representation.cep.FindCepResponse;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;

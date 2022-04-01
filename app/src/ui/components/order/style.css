@@ -1,0 +1,73 @@
+.container-order {
+    display: inline-block;
+    width: 300px;
+    margin: 12.5px;
+    min-height: 395px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 9px -2px rgba(0, 0, 0, 0.68);
+    background-image: radial-gradient(circle, #f5fbfc, #eff8f9, #eaf6f4, #e6f3ef, #e2f0e9);
+    font-size: 12.5px;
+}
+
+.order-identity {
+    margin: 7.5px 0 7.5px 12.5px;
+}
+
+.order-itens {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    width: 100%;
+    padding: 0 20px;
+    border-bottom: 1px solid #4A4B4C;
+}
+
+.order-itens li,
+.container-address-order p {
+    margin: 5px;
+}
+
+.container-address-order {
+    margin-top: 5px;
+    width: 100%;
+    padding: 0 20px;
+    font-size: 12.5px;
+    border-bottom: 1px solid #4A4B4C;
+}
+
+.container-hour {
+    width: 100%;
+    padding: 0 20px;
+    font-size: 13px;
+    margin-top: 7.5px;
+}
+
+.container-hour strong {
+    color: #049DBF;
+}
+
+.button-order {
+    background-color: #82df28;
+    width: 125px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.button-order:hover {
+    cursor: pointer;
+    background-color: #7dcc2e;
+    border: 5px solid #7dcc2e;
+    width: 127px;
+    height: 32px;
+}
+
+.container-order-command {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

@@ -1,7 +1,7 @@
 package br.com.simplifood.controller;
 
-import br.com.simplifood.representation.CreateRestaurantRequest;
-import br.com.simplifood.representation.CreateRestaurantResponse;
+import br.com.simplifood.representation.restaurant.CreateRestaurantRequest;
+import br.com.simplifood.representation.restaurant.CreateRestaurantResponse;
 import br.com.simplifood.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

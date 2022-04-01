@@ -1,7 +1,7 @@
 package br.com.simplifood.controller;
 
-import br.com.simplifood.representation.FindCepRequest;
-import br.com.simplifood.representation.FindCepResponse;
+import br.com.simplifood.representation.cep.FindCepRequest;
+import br.com.simplifood.representation.cep.FindCepResponse;
 import br.com.simplifood.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,6 @@ public class AddressController {
 
     @PostMapping("/getaddress")
     public ResponseEntity<FindCepResponse> getAddressByCep(@RequestBody FindCepRequest findCepRequest){
-        System.out.println(findCepRequest.getCep());
         FindCepResponse findCepResponse = addressService.getAddressByCep(findCepRequest.getCep());
         return findCepResponse != null ? ResponseEntity.ok().body(findCepResponse) : ResponseEntity.notFound().build();
     }
