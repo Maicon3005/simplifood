@@ -18,13 +18,8 @@ public interface WppConnectService {
     @PostMapping(value="start-session")
     @Cacheable("placementUseCase")
     QRCodeResponse getTokenWPPConnect(@RequestHeader(value = "Authorization", required = true) String authorizatiomHeader);
+
     @GetMapping(value = "/check-connection-session")
     @Cacheable("placementUseCase")
     StatusConnectionResponse getStatusConnection(@RequestHeader(value = "Authorization") String authorizationHeader);
-
-   /* @FeignClient(name="mde", url="${MDE.campaignServiceEndpoint}")
-    public interface CampaignClientService {
-        @RequestMapping(method = RequestMethod.GET, value = "/useCases/search/findByName?name={name}")
-        @Cacheable("placementUseCase")
-        PlacementUseCase findUseCaseByName(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable("name") String name);*/
 }
