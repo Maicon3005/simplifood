@@ -8,10 +8,14 @@ export function ProductItem({ ...props }) {
       <div className="container-item-image">
         <img src={urlImage} alt={productName} />
       </div>
-      <div>
+      <div className="container-item-data">
         <h3>{productName}</h3>
         <p>{description}</p>
-        <p>{price}</p>
+      </div>
+      <div className="price-item">
+        <p>
+          <strong>{`R$ ${price}`}</strong>
+        </p>
       </div>
     </li>
   );
