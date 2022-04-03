@@ -1,0 +1,6 @@
+.container-allproducts{
+    height: 275px;
+    width: auto;
+    overflow-x: auto;
+    background-color: aqua;
+}

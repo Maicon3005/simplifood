@@ -30,6 +30,8 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests().
                 antMatchers(HttpMethod.POST, "/login","/user/save","/restaurant/save").
                 permitAll().
+                antMatchers(HttpMethod.GET, "/category/getall", "/product/getall/**").
+                permitAll().
                 anyRequest().
                 authenticated().
                 and().
@@ -37,5 +39,18 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter {
                 addFilter(new JWTValidarFilter(authenticationManager())).
                 sessionManagement().
                 sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        /*
+        *  http.csrf().disable().authorizeRequests().
+                antMatchers(HttpMethod.POST, "/login","/user/save","/restaurant/save").
+                permitAll().
+                anyRequest().
+                authenticated().
+                and().
+                addFilter(new JWTAutenticarFilter(authenticationManager())).
+                addFilter(new JWTValidarFilter(authenticationManager())).
+                sessionManagement().
+                sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        * */
     }
 }
