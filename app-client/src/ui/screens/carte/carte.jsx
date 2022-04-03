@@ -8,42 +8,43 @@ export function Carte() {
   const api = useSimplifoodApi();
 
   const [categorys, setCategorys] = useState([]);
-  const [categoryId, setCategoryId] = useState("");
 
   useEffect(() => {
     async function loadAllCategories() {
       const response = await api.getAllCategories();
       setCategorys(response.categories);
-      setCategoryId(response.categories[0].id);
     }
 
     loadAllCategories();
   }, []);
-
-  function handleOnCategoryCLick(idCategory) {
-    console.log("Category id: ", idCategory);
-    setCategoryId(idCategory);
-  }
 
   return (
     <Base>
       <div className="container-carte">
         <ul className="container-categories">
           {categorys.map((category) => (
-            <li
-              className="container-category"
+            <a
               key={category.id}
-              onClick={() => handleOnCategoryCLick(category.id)}
+              href={`#${category.categoryName}`}
+              className="container-category"
             >
-              <h3>{category.categoryName}</h3>
-            </li>
+              <li id={category.categoryName}>
+                <h3>{category.categoryName}</h3>
+              </li>
+            </a>
           ))}
         </ul>
         <div>
-          {categoryId? (
-            <AllProducts categoryId={categoryId} />
+          {categorys ? (
+            categorys.map((category) => (
+              <AllProducts
+                key={category.id}
+                categoryId={category.id}
+                categoryName={category.categoryName}
+              />
+            ))
           ) : (
-            <p>Carregando</p>
+            <p>Carregando...</p>
           )}
         </div>
       </div>

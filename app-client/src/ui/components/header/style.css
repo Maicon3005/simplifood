@@ -1,5 +1,8 @@
 .container-header {
+    position: fixed;
     display: flex;
+    top: 0;
+    right: 0;
     justify-content: center;
     align-items: center;
     width: 100%;

@@ -5,7 +5,7 @@ import { useSimplifoodApi } from "../../../services/use-simplifood-api";
 import { ProductItem } from "../product-item/product-item";
 
 export function AllProducts({ ...props }) {
-  const { categoryId } = props;
+  const { categoryId, categoryName } = props;
   const api = useSimplifoodApi();
 
   const [allProducts, setAllProducts] = useState([]);
@@ -21,22 +21,28 @@ export function AllProducts({ ...props }) {
   }, []);
 
   return (
-    <ul className="container-allproducts">
-      {allProducts ? (
-        allProducts.map((product) => (
-          <ProductItem
-            key={product.id}
-            id={product.id}
-            urlImage={product.urlImage}
-            productName={product.productName}
-            description={product.description}
-            quantity={product.quantity}
-            price={product.price}
-          />
-        ))
-      ) : (
-        <p>Essa categoria não possui produto cadastrado!</p>
+    <>
+      {allProducts && (
+        <>
+          <div className="container-allproducts-title">
+            <h3>{categoryName}</h3>
+          </div>
+          <ul className="container-allproducts">
+            {allProducts &&
+              allProducts.map((product) => (
+                <ProductItem
+                  key={product.id}
+                  id={product.id}
+                  urlImage={product.urlImage}
+                  productName={product.productName}
+                  description={product.description}
+                  quantity={product.quantity}
+                  price={product.price}
+                />
+              ))}
+          </ul>
+        </>
       )}
-    </ul>
+    </>
   );
 }

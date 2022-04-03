@@ -1,6 +1,15 @@
-.container-allproducts{
+.container-allproducts {
     display: flex;
     height: 300px;
     width: auto;
     overflow-x: auto;
+    border-bottom: 0.5px solid #4A4B4C;
+}
+
+.container-allproducts-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px;
+    width: 100%;
 }
