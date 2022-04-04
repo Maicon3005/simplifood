@@ -16,8 +16,8 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
-  async function getProduct(idCategory) {
-    const response = await instance.get(`/product/get/${idCategory}`);
+  async function getProduct(idProduct) {
+    const response = await instance.get(`/product/get/${idProduct}`);
     return response.data;
   }
 
