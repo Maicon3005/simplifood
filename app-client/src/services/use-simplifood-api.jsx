@@ -26,12 +26,20 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function getPricePerProduct(idProduct, quantity) {
+    const response = await instance.get(
+      `/product/calculateprice/${idProduct}/${quantity}`
+    );
+    return response.data;
+  }
+
   return useCallback(
     {
       getAddress,
       getAllCategories,
       getAllProducts,
       getProduct,
+      getPricePerProduct,
     },
     []
   );

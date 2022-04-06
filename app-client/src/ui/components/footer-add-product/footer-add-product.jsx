@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
 import "./style.css";
 
+import { useEffect, useState } from "react";
+import { useSimplifoodApi } from "../../../services/use-simplifood-api";
+
 export function FooterAddProduct({ ...props }) {
+  const api = useSimplifoodApi();
+  const { idProduct } = props;
+
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
-  const { priceProduct } = props;
 
-  useEffect(()=>{},[price])
+  useEffect(() => {}, [api]);
 
   function handleQuantity(event) {
     event.preventDefault();
@@ -16,19 +20,28 @@ export function FooterAddProduct({ ...props }) {
     event.preventDefault();
   }
 
-  function handleClickAdd() {
+  async function handleClickAdd() {
     setQuantity(quantity + 1);
-    calculatePrice();
+    const addOneQuantity = quantity + 1;
+    try {
+      const response = await api.getPricePerProduct(idProduct, addOneQuantity);
+      setPrice(response.pricePerProduct);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  function handleClickRemove() {
+  async function handleClickRemove() {
     if (quantity > 0) setQuantity(quantity - 1);
-    calculatePrice();
-  }
-
-  function calculatePrice() {
-    const totalPrice = quantity * priceProduct;
-    setPrice(totalPrice);
+    const addOneQuantity = quantity - 1;
+    try {
+      const response = await api.getPricePerProduct(idProduct, addOneQuantity);
+      setPrice(response.pricePerProduct);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

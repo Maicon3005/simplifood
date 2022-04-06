@@ -47,7 +47,7 @@ export function ShowDetailProduct() {
               <input type="text" placeholder="Ex.: Tirar milho e ervilhas!" />
             </form>
           </div>
-          <FooterAddProduct priceProduct={product.price}/>
+          <FooterAddProduct idProduct={idProduct}/>
         </>
       ) : (
         <p>Carregando...</p>

@@ -5,15 +5,19 @@ import br.com.simplifood.model.CategoryModel;
 import br.com.simplifood.model.ProductModel;
 import br.com.simplifood.repository.CategoryRepository;
 import br.com.simplifood.repository.ProductRepository;
+import br.com.simplifood.representation.order.CalculatePriceResponse;
 import br.com.simplifood.representation.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
+
+    private final BigDecimal ZERO = new BigDecimal(0);
 
     @Autowired
     private ProductRepository productRepository;
@@ -30,7 +34,7 @@ public class ProductService {
         return new CreateProductResponse(productRepository.save(productModel).getId());
     }
 
-    public CreateProductResponse updateProduct(UpdateProductRequest updateProductRequest){
+    public CreateProductResponse updateProduct(UpdateProductRequest updateProductRequest) {
         ProductModel productModel = productRepository.getById(updateProductRequest.getIdProduct());
         productModel.setUrlImage(updateProductRequest.getImageUrl());
         productModel.setName(updateProductRequest.getName());
@@ -38,13 +42,13 @@ public class ProductService {
         productModel.setPrice(updateProductRequest.getPrice());
         productModel.setDescription(updateProductRequest.getDescription());
 
-        return new CreateProductResponse( productRepository.save(productModel).getId());
+        return new CreateProductResponse(productRepository.save(productModel).getId());
     }
 
-    public ProductResponse getProduct(Integer idProduct){
+    public ProductResponse getProduct(Integer idProduct) {
         ProductModel productModel = productRepository.getById(idProduct);
 
-        if(productModel != null){
+        if (productModel != null) {
             ProductMapper productMapper = new ProductMapper(productModel);
             return productMapper.toResponse();
         }
@@ -60,16 +64,28 @@ public class ProductService {
 
         List<ProductResponse> allProductsResponses = productModels
                 .stream()
-                .map( x -> new ProductMapper(x).toResponse()).collect(Collectors.toList());
+                .map(x -> new ProductMapper(x).toResponse()).collect(Collectors.toList());
 
         return new AllProductsResponse(allProductsResponses);
     }
 
-    public boolean deleteProduct(Integer idProduct){
+    public CalculatePriceResponse getPricePerProduct(Integer idProduct, Integer quantity) {
+        ProductModel productModel = productRepository.getById(idProduct);
+        BigDecimal individualPrice = productModel.getPrice();
+        BigDecimal quantityConverted = new BigDecimal(quantity);
+        BigDecimal totalPricePerProduct = individualPrice.multiply(quantityConverted);
+        
+        if(totalPricePerProduct.compareTo(ZERO) <= 0){
+            return new CalculatePriceResponse(ZERO);
+        }
+        return new CalculatePriceResponse(totalPricePerProduct);
+    }
+
+    public boolean deleteProduct(Integer idProduct) {
         ProductModel productModel = productRepository.getById(idProduct);
         CategoryModel categoryModel = productModel.getCategoryModel();
         categoryModel.setQuantityProducts(categoryModel.getQuantityProducts() - 1);
-        if(productModel != null) {
+        if (productModel != null) {
             productRepository.delete(productModel);
             categoryRepository.save(categoryModel);
             return true;
