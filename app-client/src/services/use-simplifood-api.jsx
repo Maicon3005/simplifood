@@ -57,6 +57,11 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function getRestaurantName() {
+    const response = await instance.get("/restaurant/getname");
+    return response.data;
+  }
+
   return useCallback(
     {
       getAddress,
@@ -68,6 +73,7 @@ export function useSimplifoodApi() {
       addProductToOrder,
       getBasicOrder,
       getOrderItens,
+      getRestaurantName,
     },
     []
   );

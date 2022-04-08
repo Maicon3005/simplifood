@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { Base, FooterAddProduct } from "../../components/";
+import { Base, FooterAddProduct, HeaderDefault } from "../../components/";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useSimplifoodApi } from "../../../services/use-simplifood-api";
@@ -26,6 +26,7 @@ export function ShowDetailProduct() {
   }, []);
   return (
     <Base>
+      <HeaderDefault />
       {product ? (
         <>
           <div className="container-details">
@@ -47,7 +48,7 @@ export function ShowDetailProduct() {
               <input type="text" placeholder="Ex.: Tirar milho e ervilhas!" />
             </form>
           </div>
-          <FooterAddProduct idProduct={idProduct}/>
+          <FooterAddProduct idProduct={idProduct} />
         </>
       ) : (
         <p>Carregando...</p>

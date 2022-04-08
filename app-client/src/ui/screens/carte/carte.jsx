@@ -1,7 +1,12 @@
 import "./style.css";
 
 import { useEffect, useState } from "react";
-import { Base, AllProducts, FooterDescriptionOrder } from "../../components/";
+import {
+  Base,
+  AllProducts,
+  FooterDescriptionOrder,
+  HeaderDefault,
+} from "../../components/";
 import { useSimplifoodApi } from "../../../services/use-simplifood-api";
 
 export function Carte() {
@@ -21,6 +26,7 @@ export function Carte() {
 
   return (
     <Base>
+      <HeaderDefault />
       {categorys ? (
         <div className="container-carte">
           <ul className="container-categories">

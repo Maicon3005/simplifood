@@ -39,7 +39,8 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter {
                         "/product/get/**",
                         "/product/calculateprice/**",
                         "/order/getbasicorder/**",
-                        "/order/getitens/**").
+                        "/order/getitens/**",
+                        "/restaurant/getname").
                 permitAll().
                 anyRequest().
                 authenticated().
