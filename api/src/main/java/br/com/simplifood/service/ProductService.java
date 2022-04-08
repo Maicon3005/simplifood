@@ -74,7 +74,7 @@ public class ProductService {
         BigDecimal individualPrice = productModel.getPrice();
         BigDecimal quantityConverted = new BigDecimal(quantity);
         BigDecimal totalPricePerProduct = individualPrice.multiply(quantityConverted);
-        
+
         if(totalPricePerProduct.compareTo(ZERO) <= 0){
             return new CalculatePriceResponse(ZERO);
         }

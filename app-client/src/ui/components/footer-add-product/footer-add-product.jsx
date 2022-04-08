@@ -2,10 +2,13 @@ import "./style.css";
 
 import { useEffect, useState } from "react";
 import { useSimplifoodApi } from "../../../services/use-simplifood-api";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export function FooterAddProduct({ ...props }) {
   const api = useSimplifoodApi();
+  const history = useHistory();
   const { idProduct } = props;
+  const ID_ORDER = localStorage.getItem("@IdOrder");
 
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
@@ -27,6 +30,51 @@ export function FooterAddProduct({ ...props }) {
       const response = await api.getPricePerProduct(idProduct, addOneQuantity);
       setPrice(response.pricePerProduct);
       console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function onHandleClickAddOrder() {
+    if (quantity > 0 && ID_ORDER) {
+      for (let i = 0; i < quantity; i++) {
+        await addProductToOrder();
+      }
+      history.push("/");
+    } else if (quantity > 0) {
+      console.log("teste");
+      try {
+        const response = await api.createOrder();
+        localStorage.setItem("@IdOrder", response.idOrder);
+        for (let i = 0; i < quantity; i++) {
+          await createProductToOrder(response.idOrder);
+        }
+        history.push("/");
+      } catch (error) {
+        console.log();
+      }
+    }
+  }
+
+  async function addProductToOrder() {
+    try {
+      const response = await api.addProductToOrder(
+        ID_ORDER,
+        idProduct,
+        quantity
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function createProductToOrder(idOrder) {
+    try {
+      const response = await api.addProductToOrder(
+        idOrder,
+        idProduct,
+        quantity
+      );
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +107,7 @@ export function FooterAddProduct({ ...props }) {
       </div>
       <div className="container-price-product">
         <div className="price-product">
-          <button>Adicionar</button>
+          <button onClick={onHandleClickAddOrder}>Adicionar</button>
           <input
             value={`R$ ${price.toFixed(2)}`}
             onChange={handlePrice}

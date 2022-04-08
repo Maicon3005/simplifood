@@ -1,16 +1,23 @@
 package br.com.simplifood.model;
 
-/*
-@Data
+import br.com.simplifood.enums.OrderStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Order")*/
+@Setter
+@Getter
+@Entity(name = "Order_model")
 public class OrderModel {
 
-        /*@Id
+        @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
 
-        @OneToMany(mappedBy = "")
-        private List<ProductModel> productModels;*/
+        private OrderStatus orderStatus;
 }

@@ -21,3 +21,13 @@
     align-items: center;
     padding: 0 15px 0 15px;
 }
+
+.container-empty-category {
+    display: flex;
+    align-items: center;
+    background-color: #049DBF;
+    height: 90vh;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
