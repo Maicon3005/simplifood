@@ -1,0 +1,41 @@
+.container-order-items {
+    display: flex;
+    height: 85px;
+    width: 100%;
+    border-bottom: 1px solid;
+}
+
+.container-order-item-description {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-left: 16px;
+}
+
+.container-order-item-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85px;
+    width: 30%;
+}
+
+.order-item-image-background img {
+    width: auto;
+    height: 85px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+.container-order-item-description h3 {
+    display: flex;
+    align-items: center;
+    height: 50%;
+}
+
+.container-order-item-description p {
+    display: flex;
+    align-items: center;
+    height: 50%;
+    font-size: 18px;
+}

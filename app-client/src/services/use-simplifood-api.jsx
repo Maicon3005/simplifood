@@ -52,6 +52,11 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function getOrderItens(idOrder) {
+    const response = await instance.get(`/order/getitens/${idOrder}`);
+    return response.data;
+  }
+
   return useCallback(
     {
       getAddress,
@@ -62,6 +67,7 @@ export function useSimplifoodApi() {
       createOrder,
       addProductToOrder,
       getBasicOrder,
+      getOrderItens,
     },
     []
   );

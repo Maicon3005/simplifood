@@ -19,10 +19,6 @@ export function Carte() {
     loadAllCategories();
   }, []);
 
-  /*
-{isOrder && <FooterDescriptionOrder />}
-  */
-
   return (
     <Base>
       {categorys ? (
@@ -59,6 +55,7 @@ export function Carte() {
           <p>Não existem itens cadastrados nesse restaurante!</p>
         </div>
       )}
+      {isOrder && <FooterDescriptionOrder />}
     </Base>
   );
 }

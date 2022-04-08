@@ -8,11 +8,11 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+@Entity(name = "Order_model")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
-@Entity(name = "Order_model")
 public class OrderModel {
 
         @Id

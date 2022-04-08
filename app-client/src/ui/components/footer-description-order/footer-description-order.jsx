@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useSimplifoodApi } from "../../../services/use-simplifood-api";
 import "./style.css";
 
 export function FooterDescriptionOrder() {
   const api = useSimplifoodApi();
   const idOrder = localStorage.getItem("@IdOrder");
+  const history = useHistory();
 
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
@@ -24,6 +26,10 @@ export function FooterDescriptionOrder() {
     loadBasicOrder();
   }, []);
 
+  function handleOnClickShowOrder() {
+    history.push("/mostrar-pedido");
+  }
+
   return (
     <>
       {quantity ? (
@@ -33,7 +39,7 @@ export function FooterDescriptionOrder() {
               {quantity === 1 ? `${quantity} item` : `${quantity} itens`}
             </strong>
           </p>
-          <button>Ver Pedido</button>
+          <button onClick={handleOnClickShowOrder}>Ver Pedido</button>
           <p>
             <strong>{`R$ ${price.toFixed(2)}`}</strong>
           </p>

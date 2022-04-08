@@ -1,6 +1,7 @@
 package br.com.simplifood.service;
 
 import br.com.simplifood.enums.OrderStatus;
+import br.com.simplifood.mapper.ProductOrderMapper;
 import br.com.simplifood.model.OrderModel;
 import br.com.simplifood.model.ProductModel;
 import br.com.simplifood.model.ProductOrderModel;
@@ -10,10 +11,13 @@ import br.com.simplifood.repository.ProductRepository;
 import br.com.simplifood.representation.order.AddProductRequest;
 import br.com.simplifood.representation.order.BasicOrderResponse;
 import br.com.simplifood.representation.order.CreateOrderResponse;
+import br.com.simplifood.representation.order.OrderItensReponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -47,19 +51,30 @@ public class OrderService {
     }
 
     public BasicOrderResponse getBasicOrderResponse(Integer idOrder){
-        /*OrderModel orderModel = orderRepository.getById(idOrder);
-        BigDecimal totalPrice = new BigDecimal(0);
+        List<ProductOrderModel> productOrderModels = productOrderRepository.findByOrderModel(idOrder);
 
-        for (int i = 0; i < orderModel.getModelList().size(); i++) {
-            totalPrice.add(orderModel.getModelList().get(i).getPrice());
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        Integer totalItems = productOrderModels.size();
+
+        for (int i = 0; i < productOrderModels.size() ; i++) {
+            totalPrice = totalPrice.add(productOrderModels.get(i).getProductModel().getPrice());
         }
 
-        System.out.println("Quantidade de produtos:" + orderModel.getModelList().size());
-        orderModel.getModelList().stream().forEach(x -> System.out.println(x.getName()));
-        System.out.println("**********************************************************");
+        return new BasicOrderResponse(totalItems, totalPrice);
+    }
 
-        Integer totalQantityOfProducts = orderModel.getModelList().size();*/
-        return new BasicOrderResponse(0, new BigDecimal(0));
+    public OrderItensReponse getOrderItens(Integer idOrder){
+        List<ProductOrderModel> productOrderModels = productOrderRepository.findByOrderModel(idOrder);
+
+        OrderItensReponse orderItensReponse = new OrderItensReponse();
+        productOrderModels
+                .stream()
+                .map(x -> orderItensReponse.
+                        getOrderItemResponses()
+                        .add(new ProductOrderMapper(x.getProductModel())
+                                .toResponse()))
+                .collect(Collectors.toList());
+        return orderItensReponse;
     }
 }
 

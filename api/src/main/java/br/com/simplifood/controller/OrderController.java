@@ -3,6 +3,7 @@ package br.com.simplifood.controller;
 import br.com.simplifood.representation.order.AddProductRequest;
 import br.com.simplifood.representation.order.BasicOrderResponse;
 import br.com.simplifood.representation.order.CreateOrderResponse;
+import br.com.simplifood.representation.order.OrderItensReponse;
 import br.com.simplifood.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,11 @@ public class OrderController {
     public ResponseEntity<BasicOrderResponse> getBasicOrder(@PathVariable Integer idOrder){
         BasicOrderResponse basicOrderResponse = orderService.getBasicOrderResponse(idOrder);
         return basicOrderResponse != null ? ResponseEntity.ok().body(basicOrderResponse) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/getitens/{idOrder}")
+    public ResponseEntity<OrderItensReponse> getItens(@PathVariable Integer idOrder){
+        OrderItensReponse orderItensReponse = orderService.getOrderItens(idOrder);
+        return orderItensReponse != null ? ResponseEntity.ok().body(orderItensReponse) : ResponseEntity.notFound().build();
     }
 }
