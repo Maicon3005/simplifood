@@ -1,5 +1,6 @@
 package br.com.simplifood.controller;
 
+import br.com.simplifood.representation.order.CalculatePriceResponse;
 import br.com.simplifood.representation.product.*;
 import br.com.simplifood.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,13 @@ public class ProductController {
     public ResponseEntity<AllProductsResponse> getAllProducts(@PathVariable Integer idCategory){
         AllProductsResponse allProductsResponse = productService.getAllProducts(idCategory);
         return allProductsResponse != null ? ResponseEntity.ok().body(allProductsResponse) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/calculateprice/{idProduct}/{quantity}")
+    public ResponseEntity<CalculatePriceResponse> getPricePerProduct(@PathVariable Integer idProduct,
+                                                                     @PathVariable Integer quantity) {
+        CalculatePriceResponse calculatePriceResponse = productService.getPricePerProduct(idProduct,quantity);
+        return calculatePriceResponse != null ? ResponseEntity.ok().body(calculatePriceResponse) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/delete/{idProduct}")

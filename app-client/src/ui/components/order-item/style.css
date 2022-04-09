@@ -1,0 +1,51 @@
+.container-order-items {
+    display: flex;
+    height: 85px;
+    width: 100%;
+    border-bottom: 1px solid #8B7D7D;
+}
+
+.container-order-item-description {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-left: 20px;
+}
+
+.container-order-item-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85px;
+    width: 30%;
+}
+
+.order-item-image-background img {
+    width: auto;
+    height: 80%;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+.order-item-image-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.container-order-item-description h3 {
+    display: flex;
+    align-items: center;
+    height: 50%;
+}
+
+.container-order-item-description p {
+    display: flex;
+    align-items: center;
+    height: 50%;
+    font-size: 18px;
+}

@@ -1,0 +1,33 @@
+.container-carte {
+    background-color: #049DBF;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+}
+
+.container-categories {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    height: calc(100vh - 95vh);
+    width: auto;
+    overflow-x: auto;
+}
+
+.container-category {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 15px 0 15px;
+}
+
+.container-empty-category {
+    display: flex;
+    align-items: center;
+    background-color: #049DBF;
+    height: 90vh;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}

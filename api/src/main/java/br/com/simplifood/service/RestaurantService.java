@@ -9,6 +9,7 @@ import br.com.simplifood.repository.AddressRepository;
 import br.com.simplifood.repository.RestaurantRepository;
 import br.com.simplifood.representation.restaurant.CreateRestaurantRequest;
 import br.com.simplifood.representation.restaurant.CreateRestaurantResponse;
+import br.com.simplifood.representation.restaurant.RestaurantNameResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,11 @@ public class RestaurantService {
 
         CreateRestaurantResponse createRestaurantResponse = new CreateRestaurantResponse(restaurantRepository.save(restaurantModel).getId());
         return createRestaurantResponse;
+    }
+
+    public RestaurantNameResponse getNameRestaurant(){
+        RestaurantModel restaurantModel = restaurantRepository.getById(1);
+        return new RestaurantNameResponse(restaurantModel.getFantasyName());
     }
 
 }
