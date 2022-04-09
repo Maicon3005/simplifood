@@ -20,4 +20,10 @@ public class OrderModel {
         private Integer id;
 
         private OrderStatus orderStatus;
+
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "address_model_id")
+        private AddressModel addressModel;
+
+        private String phone;
 }

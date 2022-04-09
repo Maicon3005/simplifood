@@ -45,5 +45,4 @@ public class RestaurantService {
         RestaurantModel restaurantModel = restaurantRepository.getById(1);
         return new RestaurantNameResponse(restaurantModel.getFantasyName());
     }
-
 }

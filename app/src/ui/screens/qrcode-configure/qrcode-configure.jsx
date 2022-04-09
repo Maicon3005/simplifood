@@ -37,7 +37,7 @@ export function QRCodeConfigure() {
     try {
       while (!isQrcode) {
         console.log("dentro do start session while");
-        await Promise.all([await getQrcode(), timeout(3000)]);
+        await Promise.all([await getQrcode(), timeout(15000)]);
       }
       statusSessionTimer();
     } catch (error) {

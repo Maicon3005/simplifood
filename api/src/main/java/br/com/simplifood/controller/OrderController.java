@@ -1,9 +1,7 @@
 package br.com.simplifood.controller;
 
-import br.com.simplifood.representation.order.AddProductRequest;
-import br.com.simplifood.representation.order.BasicOrderResponse;
-import br.com.simplifood.representation.order.CreateOrderResponse;
-import br.com.simplifood.representation.order.OrderItensReponse;
+import br.com.simplifood.representation.order.*;
+import br.com.simplifood.representation.wppapi.ConfirmNumberResponse;
 import br.com.simplifood.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +36,23 @@ public class OrderController {
     public ResponseEntity<OrderItensReponse> getItens(@PathVariable Integer idOrder){
         OrderItensReponse orderItensReponse = orderService.getOrderItens(idOrder);
         return orderItensReponse != null ? ResponseEntity.ok().body(orderItensReponse) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/saveaddress")
+    public ResponseEntity<Void> saveAddressToOrder(@RequestBody AddAddressToOrderRequest addAddressToOrderRequest){
+        boolean result = orderService.saveAddressToOrder(addAddressToOrderRequest);
+        return result ? ResponseEntity.ok().build():ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/getnumberverify/{phone}")
+    public ResponseEntity<Void> getVerifyNumber(@PathVariable String phone){
+        orderService.getVerifyNumber(phone);
+        return null;
+    }
+
+    @PostMapping("/confirmnumber/{number}/{idOrder}")
+    public ResponseEntity<ConfirmNumberResponse> confirmNumber(@PathVariable Integer number, @PathVariable Integer idOrder){
+        ConfirmNumberResponse confirmNumberResponse = orderService.confirmNumber(number, idOrder);
+        return  confirmNumberResponse.isResultVerification() ? ResponseEntity.ok().body(confirmNumberResponse): ResponseEntity.badRequest().build();
     }
 }
