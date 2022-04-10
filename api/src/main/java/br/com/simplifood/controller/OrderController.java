@@ -44,9 +44,9 @@ public class OrderController {
         return result ? ResponseEntity.ok().build():ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/getnumberverify/{phone}")
-    public ResponseEntity<Void> getVerifyNumber(@PathVariable String phone){
-        orderService.getVerifyNumber(phone);
+    @GetMapping("/getnumberverify/{phone}/{orderId}")
+    public ResponseEntity<Void> getVerifyNumber(@PathVariable String phone, @PathVariable Integer orderId){
+        orderService.getVerifyNumber(phone, orderId);
         return null;
     }
 
@@ -54,5 +54,11 @@ public class OrderController {
     public ResponseEntity<ConfirmNumberResponse> confirmNumber(@PathVariable Integer number, @PathVariable Integer idOrder){
         ConfirmNumberResponse confirmNumberResponse = orderService.confirmNumber(number, idOrder);
         return  confirmNumberResponse.isResultVerification() ? ResponseEntity.ok().body(confirmNumberResponse): ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<AllOrdersResponse> getAll(){
+        AllOrdersResponse allOrdersResponse = orderService.getAllOrders();
+        return allOrdersResponse != null ? ResponseEntity.ok().body(allOrdersResponse) :ResponseEntity.notFound().build();
     }
 }

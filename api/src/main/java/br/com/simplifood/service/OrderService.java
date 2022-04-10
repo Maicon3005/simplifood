@@ -2,23 +2,24 @@ package br.com.simplifood.service;
 
 import br.com.simplifood.config.WppConnectConfig;
 import br.com.simplifood.enums.OrderStatus;
-import br.com.simplifood.mapper.AddressMapper;
-import br.com.simplifood.mapper.MessageMapper;
-import br.com.simplifood.mapper.ProductOrderMapper;
+import br.com.simplifood.mapper.*;
 import br.com.simplifood.model.AddressModel;
 import br.com.simplifood.model.OrderModel;
 import br.com.simplifood.model.ProductModel;
 import br.com.simplifood.model.ProductOrderModel;
+import br.com.simplifood.repository.AddressRepository;
 import br.com.simplifood.repository.OrderRepository;
 import br.com.simplifood.repository.ProductOrderRepository;
 import br.com.simplifood.repository.ProductRepository;
 import br.com.simplifood.representation.order.*;
+import br.com.simplifood.representation.product.ProductOrderResponse;
 import br.com.simplifood.representation.wppapi.ConfirmNumberResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -40,6 +41,9 @@ public class OrderService {
 
     @Autowired
     private WppConfigService wppConfigService;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     private SimpMessagingTemplate simpMessagingTemplate;
 
@@ -89,6 +93,32 @@ public class OrderService {
         return orderItensReponse;
     }
 
+    public AllOrdersResponse getAllOrders(){
+        List<OrderModel> orderModelList = orderRepository.findAll();
+        AllOrdersResponse allOrdersResponse = new AllOrdersResponse();
+
+        orderModelList.stream().forEach(x -> {
+            List<ProductOrderModel> productOrderModelList = productOrderRepository
+                    .findByOrderModel(x.getId());
+
+            ProductToOrderMapper productToOrderMapper = new ProductToOrderMapper(productOrderModelList);
+            List<ProductOrderResponse> productOrderResponses = productToOrderMapper.toResponse();
+
+            AddressModel addressModel = addressRepository.getById(orderModelList.get(0).getAddressModel().getId());
+            AddressMapper addressMapper = new AddressMapper(addressModel);
+
+            Date hourOrder = orderModelList.get(0).getDateOrder();
+
+            OrderMapper orderMapper = new OrderMapper(x.getId()
+                    ,productOrderResponses,
+                    addressMapper.toResponse(),
+                    hourOrder
+                    );
+            allOrdersResponse.getOrderResponseList().add(orderMapper.toResponse());
+        });
+        return allOrdersResponse;
+    }
+
     public boolean saveAddressToOrder(AddAddressToOrderRequest addAddressToOrderRequest){
         OrderModel orderModel = orderRepository.getById(addAddressToOrderRequest.getOrderId());
         AddressMapper addressMapper = new AddressMapper(addAddressToOrderRequest);
@@ -98,7 +128,10 @@ public class OrderService {
         return true;
     }
 
-    public void getVerifyNumber(String phone){
+    public void getVerifyNumber(String phone, Integer orderId){
+        OrderModel orderModel = orderRepository.getById(orderId);
+        orderModel.setPhone(phone);
+        orderRepository.save(orderModel);
         Random random = new Random();
         int numberVerification = random.nextInt(9999);
         WppConnectConfig.verifyNumber = numberVerification;
@@ -111,15 +144,12 @@ public class OrderService {
         if(numberOfVerification.equals(WppConnectConfig.verifyNumber)){
             OrderModel orderModel = orderRepository.getById(orderId);
             orderModel.setOrderStatus(OrderStatus.LOADING);
+            orderModel.setDateOrder(new Date());
             orderRepository.save(orderModel);
-            broadcastNews("deu certo!");
             return new ConfirmNumberResponse(true);
         }
         return new ConfirmNumberResponse(false);
     }
 
-    public void broadcastNews(String message) {
-        this.simpMessagingTemplate.convertAndSend("/topic/order", message);
-    }
 }
 

@@ -90,8 +90,8 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
-  async function getVerifyNumber(phone) {
-    const response = await instance.get(`/order/getnumberverify/${phone}`);
+  async function getVerifyNumber(phone, idOrder) {
+    const response = await instance.get(`/order/getnumberverify/${phone}/${idOrder}`);
     return response.data;
   }
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity(name = "Order_model")
 @NoArgsConstructor
@@ -26,4 +27,6 @@ public class OrderModel {
         private AddressModel addressModel;
 
         private String phone;
+
+        private Date dateOrder;
 }

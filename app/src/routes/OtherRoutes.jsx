@@ -10,6 +10,7 @@ import {
   StepFive,
   StepFour,
   StepThree,
+  Teste,
   UpdateProduct,
 } from "../ui/screens";
 
@@ -27,6 +28,7 @@ export function OtherRoutes() {
       <Route path="/mostrar-produtos" component={ShowProducts} exact />
       <Route path="/atualizar-produto" component={UpdateProduct} exact />
       <Route path="/configurar-qr-code" component={QRCodeConfigure} exact />
+      <Route path="/teste" component={Teste} exact />
     </BrowserRouter>
   );
 }

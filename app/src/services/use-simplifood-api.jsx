@@ -148,6 +148,11 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function getAllOrders() {
+    const response = await instance.get("/order/getall");
+    return response.data;
+  }
+
   return useCallback(
     {
       login,
@@ -165,6 +170,7 @@ export function useSimplifoodApi() {
       getProduct,
       updateProduct,
       deleteCategory,
+      getAllOrders,
     },
     []
   );

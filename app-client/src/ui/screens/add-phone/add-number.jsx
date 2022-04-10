@@ -25,7 +25,7 @@ export function AddPhone() {
 
   async function getVerifyNumber() {
     try {
-      const response = await api.getVerifyNumber(phone);
+      const response = await api.getVerifyNumber(phone, idOrder);
       console.log(response);
       setIsConfirmed(true);
     } catch (error) {

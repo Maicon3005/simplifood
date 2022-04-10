@@ -1,47 +1,46 @@
 import "./style.css";
-import { useRef } from "react";
-import SockJsClient from "react-stomp";
 
 import { Order, TopMenu } from "../../components/";
-import { useState } from "react";
+import { useSimplifoodApi } from "../../../services/use-simplifood-api";
+import { useEffect, useState } from "react";
 
 export function Desktop() {
-  const SOCKET_URL = "http://localhost:8080/ws-message";
-  const stompRef = useRef();
+  const api = useSimplifoodApi();
+  const [orders, setOrders] = useState([]);
 
-  const [order, setOrder] = useState("");
-
-  function onConnect() {
-    try {
-      console.log("conectado com sucesso");
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    async function loadAllOrders() {
+      try {
+        const response = await api.getAllOrders();
+        console.log(response.orderResponseList);
+        setOrders(response.orderResponseList);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
 
-  function onOrderReceived(orderReceived) {
-    setOrder(orderReceived);
-    console.log(orderReceived);
-  }
+    loadAllOrders();
+  }, []);
+
   return (
-    <>
-      <SockJsClient
-        url={SOCKET_URL}
-        topics={["/topic/order"]}
-        onConnect={onConnect}
-        onMessage={onOrderReceived}
-        debug={false}
-        ref={stompRef}
-      />
+    <div>
       <TopMenu />
       <div className="container-desktop">
         <h1>Área de Trabalho</h1>
       </div>
       <div className="panel-order">
         <div className="scroller">
-          <Order />
+          {orders.map((order) => (
+            <Order
+              key={order.id}
+              id={order.id}
+              address={order.addressResponse}
+              hour="{order.hourToOrder}"
+              products={order.productOrderModelList}
+            />
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
