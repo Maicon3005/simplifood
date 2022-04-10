@@ -61,4 +61,10 @@ public class OrderController {
         AllOrdersResponse allOrdersResponse = orderService.getAllOrders();
         return allOrdersResponse != null ? ResponseEntity.ok().body(allOrdersResponse) :ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/updatestatus/{orderId}")
+    public ResponseEntity<AllOrdersResponse> updateStatus(@PathVariable Integer orderId){
+        AllOrdersResponse allOrdersResponse = orderService.updateStatusOrder(orderId);
+        return allOrdersResponse != null ? ResponseEntity.ok().body(allOrdersResponse) :ResponseEntity.notFound().build();
+    }
 }

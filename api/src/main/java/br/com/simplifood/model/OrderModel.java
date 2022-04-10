@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity(name = "Order_model")
 @NoArgsConstructor
@@ -28,5 +28,5 @@ public class OrderModel {
 
         private String phone;
 
-        private Date dateOrder;
+        private LocalDateTime hourOrder = LocalDateTime.now();
 }

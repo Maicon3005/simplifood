@@ -1,12 +1,13 @@
 package br.com.simplifood.representation.order;
 
+import br.com.simplifood.enums.OrderStatus;
 import br.com.simplifood.representation.address.AddressResponse;
 import br.com.simplifood.representation.product.ProductOrderResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -20,5 +21,7 @@ public class OrderResponse {
 
     private AddressResponse addressResponse;
 
-    private Date hourToOrder;
+    private LocalDateTime hourToOrder;
+
+    private OrderStatus orderStatus;
 }

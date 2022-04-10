@@ -19,7 +19,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -107,12 +107,13 @@ public class OrderService {
             AddressModel addressModel = addressRepository.getById(orderModelList.get(0).getAddressModel().getId());
             AddressMapper addressMapper = new AddressMapper(addressModel);
 
-            Date hourOrder = orderModelList.get(0).getDateOrder();
+            LocalDateTime hourOrder = orderModelList.get(0).getHourOrder();
 
             OrderMapper orderMapper = new OrderMapper(x.getId()
                     ,productOrderResponses,
                     addressMapper.toResponse(),
-                    hourOrder
+                    hourOrder,
+                    x.getOrderStatus()
                     );
             allOrdersResponse.getOrderResponseList().add(orderMapper.toResponse());
         });
@@ -144,11 +145,27 @@ public class OrderService {
         if(numberOfVerification.equals(WppConnectConfig.verifyNumber)){
             OrderModel orderModel = orderRepository.getById(orderId);
             orderModel.setOrderStatus(OrderStatus.LOADING);
-            orderModel.setDateOrder(new Date());
             orderRepository.save(orderModel);
             return new ConfirmNumberResponse(true);
         }
         return new ConfirmNumberResponse(false);
+    }
+
+    public AllOrdersResponse updateStatusOrder(Integer idOrder){
+        OrderModel orderModel = orderRepository.getById(idOrder);
+
+        if(orderModel.getOrderStatus() == OrderStatus.LOADING){
+            orderModel.setOrderStatus(OrderStatus.INITIATED);
+            orderRepository.save(orderModel);
+        }else if(orderModel.getOrderStatus() == OrderStatus.INITIATED){
+            orderModel.setOrderStatus(OrderStatus.DONE);
+            List<ProductOrderModel> productOrderModelList = productOrderRepository.findByOrderModel(idOrder);
+            productOrderRepository.deleteAll(productOrderModelList);
+            orderRepository.delete(orderModel);
+        }
+
+
+        return getAllOrders();
     }
 
 }

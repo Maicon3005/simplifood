@@ -153,6 +153,11 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function updateStatus(orderId) {
+    const response = await instance.post(`/order/updatestatus/${orderId}`);
+    return response.data;
+  }
+
   return useCallback(
     {
       login,
@@ -171,6 +176,7 @@ export function useSimplifoodApi() {
       updateProduct,
       deleteCategory,
       getAllOrders,
+      updateStatus,
     },
     []
   );
