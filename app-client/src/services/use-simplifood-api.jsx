@@ -2,7 +2,7 @@ import { useAxios } from "./use-axios-hook";
 import { useCallback } from "react";
 
 export function useSimplifoodApi() {
-  const instance = useAxios("http://localhost:8080");
+  const instance = useAxios("http://192.168.25.6:8080");
 
   async function getAddress(cep) {
     const response = await instance.post("/address/getaddress", {

@@ -60,7 +60,8 @@ export function OrderAddress() {
     }
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(event) {
+    event.preventDefault();
     try {
       const response = api.addAddressToOrder(
         ORDER_ID,
@@ -83,7 +84,7 @@ export function OrderAddress() {
       <HeaderDefault />
       <div className="container-address">
         <h3>Por favor, preencha o seu endereço!</h3>
-        <form className="form-address">
+        <form className="form-address" onSubmit={handleSubmit}>
           <div className="address-cep-search">
             <input
               id="cep"
@@ -140,9 +141,7 @@ export function OrderAddress() {
               type="text"
             />
           </div>
-          <button onClick={handleSubmit} className="button-submit-address">
-            Continuar
-          </button>
+          <button className="button-submit-address">Continuar</button>
         </form>
       </div>
     </Base>

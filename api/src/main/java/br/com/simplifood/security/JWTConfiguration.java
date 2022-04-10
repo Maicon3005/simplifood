@@ -34,8 +34,9 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter {
                         "/order/create",
                         "/order/addproduct",
                         "/address/getaddress",
-                        "/order/saveAddress",
-                        "/order/confirmnumber/**").
+                        "/order/saveaddress",
+                        "/order/confirmnumber/**",
+                        "/ws-message").
                 permitAll().
                 antMatchers(HttpMethod.GET, "/category/getall",
                         "/product/getall/**",
@@ -44,7 +45,8 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter {
                         "/order/getbasicorder/**",
                         "/order/getitens/**",
                         "/restaurant/getname",
-                        "/order/getnumberverify/**").
+                        "/order/getnumberverify/**",
+                        "/ws-message").
                 permitAll().
                 anyRequest().
                 authenticated().

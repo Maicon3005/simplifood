@@ -1,14 +1,14 @@
-.container-qrcode-configure{
+.container-qrcode-configure {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.page-qrcode-configure{
+.page-qrcode-configure {
     display: flex;
 }
 
-.section-qrcode-configure{
+.section-qrcode-configure {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,12 +17,48 @@
     padding: 10%;
 }
 
-.title-qrcode-configure{
+.title-qrcode-configure {
     font-size: 28px;
     margin: 10px 0px;
 }
 
-.content-qrcode-configure{
+.content-qrcode-configure {
     font-size: 15px;
     margin: 10px 0px;
+}
+
+.load-wrapper {
+    width: 60px;
+    height: 60px;
+}
+
+.loader {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border: 10px solid #b7b7b7;
+    border-top-color: #049dbf;
+    border-bottom-color: #049dbf;
+    border-radius: 50%;
+    animation: rotate 5s linear infinite;
+}
+
+.loader-inner {
+    border-top-color: #049dbf;
+    border-bottom-color: #fff;
+    animation-duration: 2.5s;
+}
+
+@keyframes rotate {
+    0% {
+        transform: scale(1) rotate(360deg);
+    }
+
+    50% {
+        transform: scale(.8) rotate(-360deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
 }

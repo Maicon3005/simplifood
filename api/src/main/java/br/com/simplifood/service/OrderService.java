@@ -15,6 +15,7 @@ import br.com.simplifood.repository.ProductRepository;
 import br.com.simplifood.representation.order.*;
 import br.com.simplifood.representation.wppapi.ConfirmNumberResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -39,6 +40,8 @@ public class OrderService {
 
     @Autowired
     private WppConfigService wppConfigService;
+
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     public CreateOrderResponse createOrder(){
         OrderModel orderModel = new OrderModel();
@@ -109,9 +112,14 @@ public class OrderService {
             OrderModel orderModel = orderRepository.getById(orderId);
             orderModel.setOrderStatus(OrderStatus.LOADING);
             orderRepository.save(orderModel);
+            broadcastNews("deu certo!");
             return new ConfirmNumberResponse(true);
         }
         return new ConfirmNumberResponse(false);
+    }
+
+    public void broadcastNews(String message) {
+        this.simpMessagingTemplate.convertAndSend("/topic/order", message);
     }
 }
 
