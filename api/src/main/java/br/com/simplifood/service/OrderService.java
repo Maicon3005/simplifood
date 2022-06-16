@@ -3,14 +3,8 @@ package br.com.simplifood.service;
 import br.com.simplifood.config.WppConnectConfig;
 import br.com.simplifood.enums.OrderStatus;
 import br.com.simplifood.mapper.*;
-import br.com.simplifood.model.AddressModel;
-import br.com.simplifood.model.OrderModel;
-import br.com.simplifood.model.ProductModel;
-import br.com.simplifood.model.ProductOrderModel;
-import br.com.simplifood.repository.AddressRepository;
-import br.com.simplifood.repository.OrderRepository;
-import br.com.simplifood.repository.ProductOrderRepository;
-import br.com.simplifood.repository.ProductRepository;
+import br.com.simplifood.model.*;
+import br.com.simplifood.repository.*;
 import br.com.simplifood.representation.order.*;
 import br.com.simplifood.representation.product.ProductOrderResponse;
 import br.com.simplifood.representation.wppapi.ConfirmNumberResponse;
@@ -44,6 +38,9 @@ public class OrderService {
 
     @Autowired
     private AddressRepository addressRepository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
     private SimpMessagingTemplate simpMessagingTemplate;
 
@@ -153,17 +150,24 @@ public class OrderService {
 
     public AllOrdersResponse updateStatusOrder(Integer idOrder){
         OrderModel orderModel = orderRepository.getById(idOrder);
+        String nameRestaurant = restaurantRepository.getById(1).getFantasyName();
+        String phone = orderModel.getPhone();
+        String message = "";
 
         if(orderModel.getOrderStatus() == OrderStatus.LOADING){
             orderModel.setOrderStatus(OrderStatus.INITIATED);
             orderRepository.save(orderModel);
+            message = "Olá! Seu pedido do restaurante "+ nameRestaurant  +" foi iniciado.";
         }else if(orderModel.getOrderStatus() == OrderStatus.INITIATED){
             orderModel.setOrderStatus(OrderStatus.DONE);
             List<ProductOrderModel> productOrderModelList = productOrderRepository.findByOrderModel(idOrder);
             productOrderRepository.deleteAll(productOrderModelList);
             orderRepository.delete(orderModel);
+            message = "Olá! Seu pedido do restaurante "+ nameRestaurant  +" saiu para entrega.";
         }
 
+        MessageMapper messageMapper = new MessageMapper(phone, message);
+        wppConnectService.sendMessage("Bearer " + wppConfigService.getToken(), messageMapper.getSendMessageRequest());
 
         return getAllOrders();
     }
