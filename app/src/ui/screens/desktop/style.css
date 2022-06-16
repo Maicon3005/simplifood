@@ -22,9 +22,10 @@
     white-space: nowrap;
 }
 
-/*
-.panel-order {
-    width: auto;
-    background-color: aqua;
-    position: absolute;
-}*/
+.notfound-orders{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}

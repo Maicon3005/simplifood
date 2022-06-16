@@ -16,6 +16,7 @@ export function StepFive() {
   const [tokenWpp, setTokenWpp] = useState({});
   const [qrcode, setQrcode] = useState("");
   const [isRedirect, setIsRedirect] = useState({ redirect: false });
+  const [progress, setProgress] = useState(0);
   let isConnected = false;
   let isQrcode = false;
 
@@ -38,12 +39,15 @@ export function StepFive() {
   }, []);
 
   async function startSession() {
+    setProgress(1);
     try {
-      while (!isQrcode) {
+      while (!isConnected) {
         console.log("dentro do start session while");
-        await Promise.all([await getQrcode(), timeout(3000)]);
+        await Promise.all([await getQrcode(), timeout(1000)]);
+        statusSessionTimer();
+        isQrcode && setProgress(2);
       }
-      statusSessionTimer();
+      setIsRedirect({ redirect: true });
     } catch (error) {
       console.log(error);
     }
@@ -60,22 +64,20 @@ export function StepFive() {
 
   async function statusSessionTimer() {
     try {
-      while (!isConnected) {
-        console.log("teste do while ", !isConnected.status);
-        console.log("dentro do while");
-        await Promise.all([await getStatusSession(), timeout(1000)]);
-      }
-
-      setIsRedirect({ redirect: true });
+      await Promise.all([await getStatusSession(), timeout(1000)]);
     } catch (error) {
       console.log(error);
     }
   }
 
   async function getStatusSession() {
-    const response = await api.statusSession(tokenWpp);
-    console.log("response tester final ", response);
-    isConnected = response.status;
+    try {
+      const response = await api.statusSession(tokenWpp);
+      console.log("response tester final ", response);
+      isConnected = response.status;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function timeout(ms) {
@@ -85,38 +87,70 @@ export function StepFive() {
   function handleSkipStep() {
     history.push("/desktop");
   }
-  return (
-    <>
-      {isRedirect.redirect && <Redirect to="/desktop" />}
-      <div className="container-main">
-        <div className="sidebar-left sidebar-left-step-five">
+
+  function showController() {
+    if (progress === 0) {
+      return (
+        <>
           <h1>Para integrar o WhatsApp do seu estabelecimento</h1>
           <p>
             Utilize o leitor de QR CODE do WhatsApp de seu estabelecimento para
             se registrar na plataforma Simplifood.
           </p>
-          {qrcode ? (
-            <img src={qrcode} alt="Imagem QR code" />
-          ) : (
-            <div className="option-qrcode">
-              <button className="button-blue" onClick={startSession}>
-                Configurar QR Code
-              </button>
-              <img
-                src={IconOu}
-                className="divider-page divider-page-large"
-                alt="Icone de escolha do login"
-              />
-              <button className="button-white-blue" onClick={handleSkipStep}>
-                Pular etapa
-              </button>
+          <div className="option-qrcode">
+            <button className="button-blue" onClick={startSession}>
+              Configurar QR Code
+            </button>
+            <img
+              src={IconOu}
+              className="divider-page divider-page-large"
+              alt="Icone de escolha do login"
+            />
+            <button className="button-white-blue" onClick={handleSkipStep}>
+              Pular etapa
+            </button>
+          </div>
+        </>
+      );
+    } else if (progress === 1) {
+      return (
+        <>
+          <div className="load-wrapper">
+            <div className="loader">
+              <div className="loader loader-inner"></div>
             </div>
+          </div>
+          <p>Carregando QR code...</p>
+        </>
+      );
+    } else if (progress === 2) {
+      return (
+        <>
+          <h1>Para integrar o WhatsApp do seu estabelecimento</h1>
+          <p>
+            Utilize o leitor de QR CODE do WhatsApp de seu estabelecimento para
+            se registrar na plataforma Simplifood.
+          </p>
+          <img src={qrcode} alt="Imagem QR code" />
+          );
+        </>
+      );
+    }
+  }
+
+  return (
+    <>
+      {isRedirect.redirect && <Redirect to="/desktop" />}
+      <div className="container-main">
+        <div className="sidebar-left sidebar-left-step-five">
+          {showController()}
+          {progress != 1 && (
+            <img
+              className="icon-step-four"
+              src={IconStepFive}
+              alt="Passo um da criação de conta"
+            />
           )}
-          <img
-            className="icon-step-four"
-            src={IconStepFive}
-            alt="Passo um da criação de conta"
-          />
         </div>
         <SidebarRight content="Com o nosso suporte você vai conseguir produzir muito mais em menos tempo!" />
       </div>

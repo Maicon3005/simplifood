@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name = "Order_model")
 @NoArgsConstructor
@@ -20,4 +21,12 @@ public class OrderModel {
         private Integer id;
 
         private OrderStatus orderStatus;
+
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "address_model_id")
+        private AddressModel addressModel;
+
+        private String phone;
+
+        private LocalDateTime hourOrder = LocalDateTime.now();
 }

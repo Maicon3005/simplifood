@@ -4,6 +4,7 @@ import br.com.simplifood.representation.wppapi.QRCodeResponse;
 import br.com.simplifood.representation.wppapi.StartSessionResponse;
 import br.com.simplifood.representation.wppapi.StatusConnectionResponse;
 import br.com.simplifood.representation.wppapi.WPPTokenRequest;
+import br.com.simplifood.service.WppConfigService;
 import br.com.simplifood.service.WppConnectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,13 @@ public class WppConnectController {
     @Autowired
     private WppConnectService wppConnectService;
 
+    @Autowired
+    private WppConfigService wppConfigService;
+
     @PostMapping("/generatetoken")
     private ResponseEntity<StartSessionResponse> getGenerateToken(){
         StartSessionResponse startSessionResponse = wppConnectService.getStartSession();
+        wppConfigService.setToken(startSessionResponse);
         return startSessionResponse != null ? ResponseEntity.ok().body(startSessionResponse): ResponseEntity.notFound().build();
     }
 

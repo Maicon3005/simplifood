@@ -1,9 +1,7 @@
 package br.com.simplifood.controller;
 
-import br.com.simplifood.representation.order.AddProductRequest;
-import br.com.simplifood.representation.order.BasicOrderResponse;
-import br.com.simplifood.representation.order.CreateOrderResponse;
-import br.com.simplifood.representation.order.OrderItensReponse;
+import br.com.simplifood.representation.order.*;
+import br.com.simplifood.representation.wppapi.ConfirmNumberResponse;
 import br.com.simplifood.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +36,35 @@ public class OrderController {
     public ResponseEntity<OrderItensReponse> getItens(@PathVariable Integer idOrder){
         OrderItensReponse orderItensReponse = orderService.getOrderItens(idOrder);
         return orderItensReponse != null ? ResponseEntity.ok().body(orderItensReponse) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/saveaddress")
+    public ResponseEntity<Void> saveAddressToOrder(@RequestBody AddAddressToOrderRequest addAddressToOrderRequest){
+        boolean result = orderService.saveAddressToOrder(addAddressToOrderRequest);
+        return result ? ResponseEntity.ok().build():ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/getnumberverify/{phone}/{orderId}")
+    public ResponseEntity<Void> getVerifyNumber(@PathVariable String phone, @PathVariable Integer orderId){
+        orderService.getVerifyNumber(phone, orderId);
+        return null;
+    }
+
+    @PostMapping("/confirmnumber/{number}/{idOrder}")
+    public ResponseEntity<ConfirmNumberResponse> confirmNumber(@PathVariable Integer number, @PathVariable Integer idOrder){
+        ConfirmNumberResponse confirmNumberResponse = orderService.confirmNumber(number, idOrder);
+        return  confirmNumberResponse.isResultVerification() ? ResponseEntity.ok().body(confirmNumberResponse): ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<AllOrdersResponse> getAll(){
+        AllOrdersResponse allOrdersResponse = orderService.getAllOrders();
+        return allOrdersResponse != null ? ResponseEntity.ok().body(allOrdersResponse) :ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/updatestatus/{orderId}")
+    public ResponseEntity<AllOrdersResponse> updateStatus(@PathVariable Integer orderId){
+        AllOrdersResponse allOrdersResponse = orderService.updateStatusOrder(orderId);
+        return allOrdersResponse != null ? ResponseEntity.ok().body(allOrdersResponse) :ResponseEntity.notFound().build();
     }
 }

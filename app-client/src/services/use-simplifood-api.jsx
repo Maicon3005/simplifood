@@ -2,7 +2,7 @@ import { useAxios } from "./use-axios-hook";
 import { useCallback } from "react";
 
 export function useSimplifoodApi() {
-  const instance = useAxios("http://localhost:8080");
+  const instance = useAxios("http://192.168.25.6:8080");
 
   async function getAddress(cep) {
     const response = await instance.post("/address/getaddress", {
@@ -62,6 +62,46 @@ export function useSimplifoodApi() {
     return response.data;
   }
 
+  async function getAddress(cep) {
+    const response = await instance.post("/address/getaddress", {
+      cep: cep,
+    });
+    return response;
+  }
+
+  async function addAddressToOrder(
+    orderId,
+    cep,
+    city,
+    state,
+    district,
+    street,
+    number
+  ) {
+    const response = await instance.post("/order/saveaddress", {
+      orderId: orderId,
+      cep: cep,
+      city: city,
+      state: state,
+      district: district,
+      street: street,
+      number: number,
+    });
+    return response.data;
+  }
+
+  async function getVerifyNumber(phone, idOrder) {
+    const response = await instance.get(`/order/getnumberverify/${phone}/${idOrder}`);
+    return response.data;
+  }
+
+  async function verifyNumber(number, idOrder) {
+    const response = await instance.post(
+      `/order/confirmnumber/${number}/${idOrder}`
+    );
+    return response.data;
+  }
+
   return useCallback(
     {
       getAddress,
@@ -74,6 +114,10 @@ export function useSimplifoodApi() {
       getBasicOrder,
       getOrderItens,
       getRestaurantName,
+      getAddress,
+      addAddressToOrder,
+      getVerifyNumber,
+      verifyNumber,
     },
     []
   );
