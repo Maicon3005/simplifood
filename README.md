@@ -7,6 +7,7 @@
 
 O **Simpli**food é uma plataforma para pedidos de comida, onde você pode criar seu cardápio e disponibilizá-lo a seus clientes através de um link no WhatsApp. 
 
-<p align="center">
-  <img width="400" height="300" src="app/src/assets/toReadme/order_img.gif" />
-</p>
+![Imagem do Pedido](https://github.com/Maicon3005/simplifood/tree/master/app/src/assets/toReadme/order_img.gif)
+
+
+
