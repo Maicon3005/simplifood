@@ -11,4 +11,8 @@ O **Simpli**food é uma plataforma para pedidos de comida, onde você pode criar
   <img width="225" height="500" src="app/src/assets/to-readme/order_video.gif"/>
 </p>
 
+## Como executar o projeto
+
+
+
 
